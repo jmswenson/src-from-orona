@@ -1,0 +1,26 @@
+## print every other line starting with the second
+i=1; while read -r line; do [ $((i++ % 2)) -eq 0 ] && echo $line; done <"test.txt"
+## print every other line starting with the first
+i=0; while read -r line; do [ $((i++ % 2)) -eq 0 ] && echo $line; done <"test.txt"
+
+## How to remove the first character from every other line (note that this is easy to do with cat too)
+i=0; while read -r line; do [ $((i++ % 2)) -eq 0 ] && echo $line|sed 's/^.//'; done <"test.txt"
+
+## How to remove the first character from every other line and keep all lines
+i=0; while read -r line; do [ $((i++ % 2)) -eq 0 ] && echo $line|sed 's/^.//'||echo $line; done <"test.txt"
+### note see: http://www.cyberciti.biz/faq/unix-howto-read-line-by-line-from-file/ if leading or trailing whitespace gets trimmed to fix
+## I'm also not sure that this command works on really large files :(. Could use "split -l 200000 text.txt" to make more reasonable chunks
+## split -l 4000000 totalRNA0-2h.fastq
+
+
+
+# i=0; for j in $(ls x*); do while read -r line; do [ $((i++ % 2)) -eq 0 ] && echo $line|sed 's/^.//'||echo $line; done <"$j" >$j"_fixed.txt"; done;
+# i=1; for j in $(ls x*); do while read -r line; do [ $((i++ % 2)) -eq 0 ] && echo $line|sed 's/^.//'||echo $line; done <"$j" >$j"_fixed.txt"; done;
+
+#### Another attempt
+OLDIFS=$IFS;IFS=$'\n';i=1; for j in $(cat test.txt); do [ $((i++ % 2)) -eq 0 ] && echo $j|sed 's/^.//'||echo $j;done>test_fixed.txt;IFS=$OLDIFS;
+
+#### Another attempt
+OLDIFS=$IFS;IFS=$'\n';i=1; while read -r line; do [ $((i++ % 2)) -eq 0 ] && echo $line|sed 's/^.//'||echo $line;done < test.txt  > test_fixed.txt;IFS=$OLDIFS;
+
+

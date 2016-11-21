@@ -1,0 +1,49 @@
+6_10_09_PIAS_gfpcontrolonthesameslide_rnai_5days_HP1a_pH2Av_60minafterIR_4_R3D_D3D.dv:316  
+6_10_09_PIAS_gfpcontrolonthesameslide_rnai_5days_HP1a_pH2Av_60minafterIR_5_R3D_D3D.dv:263  
+6_10_09_PIAS_gfpcontrolonthesameslide_rnai_5days_HP1a_pH2Av_60minafterIR_7_R3D_D3D.dv:259  
+6_10_09_PIAS_gfpcontrolonthesameslide_rnai_5days_HP1a_pH2Av_60minafterIR_8_R3D_D3D.dv:259  
+6_10_09_PIAS_gfpcontrolonthesameslide_rnai_5days_HP1a_pH2Av_60minafterIR_2_R3D_D3D.dv:251  
+6_10_09_PIAS_gfpcontrolonthesameslide_rnai_5days_HP1a_pH2Av_60minafterIR_6_R3D_D3D.dv:222  
+(Other)                                                                              :291  
+Min.   : 1.000  
+1st Qu.: 3.000  
+Median : 6.000  
+Mean   : 6.479  
+3rd Qu.: 9.000  
+Max.   :15.000  
+NA
+Min.   :  2.00  
+1st Qu.: 38.00  
+Median : 68.00  
+Mean   : 83.62  
+3rd Qu.:114.00  
+Max.   :418.00  
+NA
+Min.   : 266.0  
+1st Qu.: 552.4  
+Median : 647.1  
+Mean   : 681.5  
+3rd Qu.: 771.6  
+Max.   :1858.5  
+NA
+Min.   : 321  
+1st Qu.: 802  
+Median :1018  
+Mean   :1120  
+3rd Qu.:1340  
+Max.   :3507  
+NA
+Min.   :0.410  
+1st Qu.:0.950  
+Median :1.100  
+Mean   :1.144  
+3rd Qu.:1.290  
+Max.   :3.400  
+NA
+Min.   :0.060  
+1st Qu.:0.670  
+Median :0.980  
+Mean   :1.152  
+3rd Qu.:1.410  
+Max.   :7.790  
+NA

@@ -1,0 +1,16 @@
+{"nodes":[{"name":"Myriel","group":1},{"name":"Napoleon","group":1},{"name":"Mlle.Baptistine","group":1},
+{"name":"Mme.Magloire","group":2},{"name":"CountessdeLo","group":2},{"name":"Geborand","group":3},{"name":"Champtercier","group":1}],
+"links":[{"source":1,"target":0,"value":1},{"source":2,"target":0,"value":8},{"source":3,"target":0,"value":10},
+{"source":3,"target":2,"value":6},{"source":4,"target":0,"value":15},{"source":4,"target":6,"value":1},{"source":6,"target":0,"value":1}]}
+
+
+//Name is the display name
+//Group is the chapter the character occured in (Group is the bait or timepoint ---- color)
+//Source and target refer to nodes (starting at 0) 
+//Value is the number of times they co-occurred (Value is the peptide count? or number of times they co-IP --- intensity of color)
+//  Try out four: http://www.findtheconversation.com/concept-map 
+//  http://mbostock.github.io/d3/talk/20111116/bundle.html
+//  http://bost.ocks.org/mike/hive/
+//  http://bost.ocks.org/mike/miserables/
+
+// To convert my two column interaction list to json format (have an option for including the "weight" or # of peptides for the interaction)

@@ -1,0 +1,36 @@
+
+# source("stats_sylvain.txt")
+# Set threshold for group
+thr <- 1.9;
+
+# Process control
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/PIAS_control/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(cont$Rdna,by=list(cont$NucID,cont$Filename),FUN=mean)
+pos_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>thr));
+
+for (i in 1:length(aggRdna$Group.1))
+total_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>0));
+
+Perc_pos_Rdna_cont = pos_RdnaC/total_RdnaC;
+
+# Process experiment
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/PIAS/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(cont$Rdna,by=list(cont$NucID,cont$Filename),FUN=mean)
+pos_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_Rdna[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>thr));
+
+for (i in 1:length(aggRdna$Group.1))
+total_Rdna[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>0));
+
+Perc_pos_Rdna = pos_Rdna/total_Rdna; #gives percent of foci in a nucleus above a given Rdna value which is defined by thr
+
+postscript("PIAS1.9.ps") #turns postscript on to save file to location in ""
+boxplot(Perc_pos_Rdna_cont, Perc_pos_Rdna) #makes boxplot
+dev.off() #turns postscript off

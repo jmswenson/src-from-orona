@@ -1,0 +1,13 @@
+PATH=${HOME}/bin\
+:/LoDoseq/R3/bin\
+:/usr/local/sbin\
+:/usr/local/bin\
+:/usr/sbin\
+:/usr/bin\
+:/sbin\
+:/bin\
+:/home/sasha/rsem-1.2.14\
+:/LoDoseq/tools/ngsplot/bin\
+:/home/jswenson/perl5/bin\
+:./
+

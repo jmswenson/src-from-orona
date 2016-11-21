@@ -1,0 +1,44 @@
+# source("ave_foci_per_nuc.txt")
+
+sink("HP2_ave_foci_per_nuc_output");
+
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/nuc_summary.txt",header = TRUE);
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/nuc_summary.txt",header = TRUE);
+x<- sum(exp$FociCount)/nrow(exp); # counts number of foci and divides it by the number of nuclei    gives average number of foci per nucleus in the experiment
+sdx<-sd(exp$FociCount/nrow(exp));
+y<- sum(cont$FociCount)/nrow(cont);
+sdy<-sd(cont$FociCount);
+cat("stdev of exp");
+print(sdx);
+cat("stdev of cont");
+print(sdy);
+cat("average number of foci per nucleus in the exp");
+print(x);
+cat("average number of foci per nucleus in the exp");
+print(y);
+cat("ratio of the average number of foci per nucleus with numbers greater than one indicating more foci per nucleus in exp");
+print(x/y); # ratio of the average number of foci per nucleus with numbers greater than one indicating more foci per nucleus in exp
+sink();
+
+# postscript("boxplot_test.ps");
+# boxplot(x,y);
+# dev.off(); #turns postscript off
+
+# cat("Wilcox test");
+# print(wilcox.test(x,y));
+# t.test(x,y);
+
+
+#par for graphing parameters
+#write.table (quotes=NULL)
+#plot
+#legend
+# hist(exp$Rdna, breaks = 1000, main ="Histogram of exp$Rdna of HP2")
+# hist(cont$Rdna, breaks = 1000, main ="Histogram of cont$Rdna of HP2_control")
+
+
+# x <- rnorm(1000)
+# y <- rnorm(1000, mean=1)
+# breaks <- pretty(range(c(x,y)), 20)
+# hist(x, breaks=breaks, col='red', main="Hist of x and y")
+# hist(y, breaks=breaks, add=TRUE, border='blue') 

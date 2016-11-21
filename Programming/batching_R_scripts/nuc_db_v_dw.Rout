@@ -1,0 +1,157 @@
+
+R version 2.9.2 (2009-08-24)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # source ("/Users/joel/Desktop/new_sylvain_my_R_analysis/nuc_db_v_dw.R")
+> 
+> ## Code for making grouped histograms and density plots and then doing stats on the binned data for the foci summary
+> ## Code for searching a vector's name and loading those files
+> a<-list.files(path="/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt",pattern="nuc_summary_",recursive=TRUE);
+> for (i in 1:length(a)) {
++ 	cont_nuc<-read.table(a[i], header=TRUE); #Reads in from foci summary, both control and exp....one at a time
++ 	results<-c()
++ 	brt<-subset(cont_nuc, numPfoci>=1)
++ 	weak<-subset(cont_nuc, !numPfoci>=1)
++ 	
++ 	#### Code for getting rid of na s	
++ 	brt<-brt[!is.na(brt$nfoci),];
++ 	brt<-brt[!is.na(brt$n_size),];
++ 	brt<-brt[!is.na(brt$foci_size),];
++ 	brt<-brt[!is.na(brt$n_mean),];
++ 	brt<-brt[!is.na(brt$f_mean),];
++ 	brt<-brt[!is.na(brt$foci_mean),];
++ 	brt<-brt[!is.na(brt$Rdna),];
++ 	brt<-brt[!is.na(brt$Rgrad),];
++ 	brt<-brt[!is.na(brt$foci_dist),];
++ 	brt<-brt[!is.na(brt$numPfoci),];
++ 	brt<-brt[!is.na(brt$numNfoci),];
++ 	brt<-brt[!is.na(brt$size_DB),];
++ 	brt<-brt[!is.na(brt$mean_DB),];
++ 	brt<-brt[!is.na(brt$nuc_dist),];
++ 	#### Code for getting rid of na s	
++ 	weak<-weak[!is.na(weak$nfoci),];
++ 	weak<-weak[!is.na(weak$n_size),];
++ 	weak<-weak[!is.na(weak$foci_size),];
++ 	weak<-weak[!is.na(weak$n_mean),];
++ 	weak<-weak[!is.na(weak$f_mean),];
++ 	weak<-weak[!is.na(weak$foci_mean),];
++ 	weak<-weak[!is.na(weak$Rdna),];
++ 	weak<-weak[!is.na(weak$Rgrad),];
++ 	weak<-weak[!is.na(weak$foci_dist),];
++ 	weak<-weak[!is.na(weak$numPfoci),];
++ 	weak<-weak[!is.na(weak$numNfoci),];
++ 	weak<-weak[!is.na(weak$size_DB),];
++ 	weak<-weak[!is.na(weak$mean_DB),];
++ 	weak<-weak[!is.na(weak$nuc_dist),];
++ 	#### Code for getting rid of na s	
++ 	
++ 	dir.create('/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt/w_v_b_Nuc_Histograms_of_both/') # Use this to create new folders to better organize files
++ 	dir.create('/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt/w_v_b_Nuc_Density_plots_of_both/') # Use this to create new folders to better organize files
++ 	for (k in 2:15) {
++ 		if (k==2) {
++ 			aa<-strsplit(a[i], "nuc_summary_");
++ 			aar<-strsplit(aa[[1]][2],".txt");
++ 			if (nrow(brt)>0) {
++ 				results<-ks.test(t(brt[k]), t(weak[k]));
++ 				results<-results$p.value;
++ 				results1<-wilcox.test(t(brt[k]), t(weak[k]),alternative="two.sided");
++ 				results1<-results1$p.value;
++ 					which_hist<-paste("w_v_b_Nuc_Histograms_of_both/", aar,"_",colnames(brt[k]),"_grouped.tiff",sep="");
++ 					which_hist1<-paste("w_v_b_Nuc_Density_plots_of_both/","Density_",aar,"_",colnames(brt[k]),"_grouped.tiff",sep="");
++ 				tiff(file=which_hist);
++ 				hist_title<-paste("Histogram for ",aar," of ",colnames(brt[k]), " grouped.red=bright",sep="");
++ 				brk<-(max(brt[k],weak[k]) - min(brt[k],weak[k]))/100;
++ 				brks<-seq(min(brt[k],weak[k]),max(brt[k],weak[k]), by=brk);
++ 				xlm<-min(min(brt[k]),min(weak[k]));  ##  This line and next sets appropriate limits for histogram so all data is shown
++ 				xlm<-append(xlm, max(max(brt[k]),max(weak[k])));
++ 				xlab1<-paste(colnames(brt[k])," n_weak=",nrow(weak[k]), "  n_brt=",nrow(brt[k]), sep="");
++ 				h_c<-hist(t(brt[k]),breaks=brks, col="red",density=20,main=hist_title,xlim=xlm, xlab=xlab1);
++ 				h_e<-hist(t(weak[k]),breaks=brks,col="green",add=T,density=15,angle=135);  ########### When using add=T, it only includes the ylim and xlim from the first graph
++ 				dev.off();
++ 	####### Maybe make x and y axis fixed...........generate both?
++ 	
++ 				tiff(file=which_hist1);
++ 				hist_title<-paste("Density for ",aar," of ",colnames(brt[k]), " grouped.red=bright",sep="");
++ 				h_c_d<-hist(t(brt[k]),breaks=brks, col="red",density=20,main=hist_title,freq=FALSE,xlim=xlm, xlab=xlab1);
++ 				lines(density(t(brt[k])), col="red",lwd=3);
++ 				h_e_d<-hist(t(weak[k]),breaks=brks,col="green",add=T,density=15,angle=135,freq=FALSE);
++ 				lines(density(t(weak[k])), col="green",lwd=3);
++ 				dev.off();
++ 				
++ 				pp<-cor.test(h_e$density,h_c$density,alternative="two.sided",method="pearson");
++ 				pp_p<-pp$p.value;
++ 				pp_c<-pp$estimate;
++ 				r_pear_p<-pp_p;
++ 				r_pear_c<-pp_c;
++ 			}
++ 			
++ 		} else {
++ 			aa<-strsplit(a[i], "nuc_summary_");
++ 			aar<-strsplit(aa[[1]][2],".txt");
++ 			
++ 			if (nrow(brt)>0) {
++ 
++ 					which_hist<-paste("w_v_b_Nuc_Histograms_of_both/", aar,"_",colnames(brt[k]),"_grouped.tiff",sep="");
++ 					which_hist1<-paste("w_v_b_Nuc_Density_plots_of_both/","Density_",aar,"_",colnames(brt[k]),"_grouped.tiff",sep="");
++ 				tiff(file=which_hist);
++ 				hist_title<-paste("Histogram for ",aar," of ",colnames(brt[k]), " grouped.red=bright",sep="");
++ 				brk<-(max(brt[k],weak[k]) - min(brt[k],weak[k]))/100;
++ 				brks<-seq(min(brt[k],weak[k]),max(brt[k],weak[k]), by=brk);
++ 				xlm<-min(min(brt[k]),min(weak[k]));  ##  This line and next sets appropriate limits for histogram so all data is shown
++ 				xlm<-append(xlm, max(max(brt[k]),max(weak[k])));
++ 				xlab1<-paste(colnames(brt[k])," n_weak=",nrow(weak[k]), "  n_brt=",nrow(brt[k]), sep="");
++ 				h_c<-hist(t(brt[k]),breaks=brks, col="red",density=20,main=hist_title,xlim=xlm, xlab=xlab1);
++ 				h_e<-hist(t(weak[k]),breaks=brks,col="green",add=T,density=15,angle=135);
++ 				dev.off();
++ 				pp<-cor.test(h_e$density,h_c$density,alternative="two.sided",method="pearson");
++ 				pp_p<-pp$p.value;
++ 				pp_c<-pp$estimate;
++ 				r_pear_p<-rbind(r_pear_p,pp_p);
++ 				r_pear_c<-rbind(r_pear_c,pp_c);
++ 		
++ 				tiff(file=which_hist1);
++ 				hist_title<-paste("Density for ",aar," of ",colnames(brt[k]), " grouped.red=bright",sep="");
++ 				h_c_d<-hist(t(brt[k]),breaks=brks, col="red",density=20,main=hist_title,freq=FALSE,xlim=xlm, xlab=xlab1);
++ 				lines(density(t(brt[k])), col="red",lwd=3);
++ 				h_e_d<-hist(t(weak[k]),breaks=brks,col="green",add=T,density=15,angle=135,freq=FALSE);
++ 				lines(density(t(weak[k])), col="green",lwd=3);
++ 				dev.off();
++ 				
++ 				
++ 				
++ 				rr<-ks.test(t(brt[k]), t(weak[k]));
++ 				rr<-rr$p.value;
++ 				results<-rbind(results, rr);
++ 				rr1<-wilcox.test(t(brt[k]), t(weak[k]),alternative="two.sided");
++ 				rr1<-rr1$p.value;
++ 				results1<-rbind(results1, rr1);
++ 			}
++ 		}
++ 	}
++ 	all_test<-cbind(results,results1,r_pear_c,r_pear_p)
++ 	colnames(all_test)<-c("ks p_value","wilcox p_value","pearson_cor","pearson p_value")
++ 	rownames(all_test)<-colnames(brt[2:15])
++ 		f_name<-paste("w_v_b_Nuc_Density_plots_of_both/","weak_vs_bright_",aar, "_nuc_stats_test_results.csv", sep="")
++ 	write.table(all_test, file=f_name,row.names=colnames(brt[2:15]),col.names=NA,sep=","); ## col.names=NA  lines up col.names properly when row.names=TRUE
++ }
+Error in file(file, "r") : cannot open the connection
+Calls: read.table -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file 'processed/fitc/nuc_summary_HP1a_control_tech.txt': No such file or directory
+Execution halted

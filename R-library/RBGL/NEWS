@@ -1,0 +1,26 @@
+June 19, 2012
+=============
+Transitioning in two directions: first,
+  replace boost header sources with boost 1.49
+  second, verify compilation with g++ 4.7
+  this entails sacrificing layout.cpp at least
+  temporarily, use Rgraphviz if possible
+
+
+Nov 30, 2005
+============
+New functions:
+  "is.triangulated",
+  "maxClique"
+
+Oct 15, 2005
+============
+New functions:
+ "articulationPoints",
+ "biConnComp",
+ "floyd.warshall.all.pairs.sp",
+ "fruchtermanReingoldForceDirectedLayout",
+ "highlyConnSG",
+ "randomGraphLayout",
+ "sequential.vertex.coloring", 
+

@@ -1,0 +1,114 @@
+# source("nuc_area_and_brightness.txt")
+
+sink("EXP_nuc_area_and_brightness");
+
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/EXP_control/processed/fitc/nuc_summary.txt",header = TRUE);
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/EXP/processed/fitc/nuc_summary.txt",header = TRUE);
+
+shapiro.test(cont$NucArea);
+shapiro.test(exp$NucArea);
+t.test(exp$NucArea,cont$NucArea); # use if data is normal
+wilcox.test(exp$NucArea,cont$NucArea); # use if data is not normal
+
+
+shapiro.test(cont$MeanNucDapi);
+shapiro.test(exp$MeanNucDapi);
+t.test(exp$MeanNucDapi,cont$MeanNucDapi); # use if data is normal
+wilcox.test(exp$MeanNucDapi,cont$MeanNucDapi); # use if data is not normal
+
+cat("mean of NucArea of exp");
+print(mean(exp$NucArea));
+cat("sd of NucArea of exp");
+print(sd(exp$NucArea));
+cat("range of NucArea of exp");
+print(range(exp$NucArea));
+
+cat("mean of NucArea of cont");
+print(mean(cont$NucArea));
+cat("sd of NucArea of cont");
+print(sd(cont$NucArea));
+cat("range of NucArea of cont");
+print(range(cont$NucArea));
+
+cat('\n'); # inserts blank line
+
+cat("mean of MeanNucDapi of exp");
+print(mean(exp$MeanNucDapi));
+cat("sd of MeanNucDapi of exp");
+print(sd(exp$MeanNucDapi));
+cat("range of MeanNucDapi of exp");
+print(range(exp$MeanNucDapi));
+
+cat("mean of MeanNucDapi of cont");
+print(mean(cont$MeanNucDapi));
+cat("sd of MeanNucDapi of cont");
+print(sd(cont$MeanNucDapi));
+cat("range of MeanNucDapi of cont");
+print(range(cont$MeanNucDapi));
+
+cat('\n'); # inserts blank line
+cat("shapiro.test of NucArea_exp");
+print(shapiro.test(exp$NucArea));
+cat("shapiro.test of NucArea_cont");
+print(shapiro.test(cont$NucArea));
+cat("t.test of NucArea");
+print(t.test(exp$NucArea,cont$NucArea));
+cat("wilcox.test of NucArea");
+print(wilcox.test(exp$NucArea,cont$NucArea));
+
+cat('\n'); # inserts blank line
+cat('\n'); # inserts blank line
+
+
+cat("shapiro.test of MeanNucDapi_exp");
+print(shapiro.test(exp$MeanNucDapi));
+cat("shapiro.test of MeanNucDapi_cont");
+print(shapiro.test(cont$MeanNucDapi));
+cat("t.test of MeanNucDapi");
+print(t.test(exp$MeanNucDapi,cont$MeanNucDapi));
+cat("wilcox.test of MeanNucDapi");
+print(wilcox.test(exp$MeanNucDapi,cont$MeanNucDapi));
+
+sink();
+
+
+exp_col<-rgb(1,0,0,.75); #assigns color and alpha value to exp data points
+cont_col<-rgb(0,0,1,.5);
+
+tiff(file="Histogram_of_EXP_and_GFP_control_NucArea.tiff");
+hist(exp$NucArea, breaks=100, col=exp_col, main="Histogram of EXP and GFP control_NucArea");
+hist(cont$NucArea, breaks=100, col=cont_col, add=TRUE);
+legend("topleft", c("EXP","EXP_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff(file="Histogram_of_EXP_NucArea.tiff")
+hist(exp$NucArea, breaks=100, col=exp_col, main="Histogram of EXP_NucArea");
+legend("topleft", c("EXP","EXP_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff("Histogram_of_EXP_control_NucArea.tiff")
+hist(cont$NucArea, breaks=100, col=cont_col, main="Histogram of EXP_control_NucArea");
+legend("topleft", c("EXP","EXP_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+
+
+exp_col<-rgb(1,0,0,.75); #assigns color and alpha value to exp data points
+cont_col<-rgb(0,0,1,.5);
+
+tiff(file="Histogram_of_EXP_and_GFP_control_MeanNucDapi.tiff");
+hist(exp$MeanNucDapi, breaks=100, col=exp_col, main="Histogram of EXP and GFP control_MeanNucDapi");
+hist(cont$MeanNucDapi, breaks=100, col=cont_col, add=TRUE);
+legend("topleft", c("EXP","EXP_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff(file="Histogram_of_EXP_MeanNucDapi.tiff")
+hist(exp$MeanNucDapi, breaks=100, col=exp_col, main="Histogram of EXP_MeanNucDapi");
+legend("topleft", c("EXP","EXP_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff("Histogram_of_EXP_control_MeanNucDapi.tiff")
+hist(cont$MeanNucDapi, breaks=100, col=cont_col, main="Histogram of EXP_control_MeanNucDapi");
+legend("topleft", c("EXP","EXP_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+

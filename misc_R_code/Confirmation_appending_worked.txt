@@ -1,0 +1,2 @@
+If value is zero then all_in_one vector is the same length as all the individual vectors added up[1] 0
+Length of all_in_one[1] 877

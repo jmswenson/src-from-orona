@@ -1,0 +1,142 @@
+
+R version 2.9.2 (2009-08-24)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # source ("/Users/joel/Desktop/new_sylvain_my_R_analysis/code_in_progress.R")
+> 
+> 
+> 
+> #### dir.create('/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt/test') # Use this to create new folders to better organize files
+> 
+> 
+> 
+> # Code for making grouped histograms and density plots and then doing stats on the binned data for the foci summary
+> # Code for searching a vector's name and loading those files
+>  a<-list.files(path="/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt",pattern="foci_summary_",recursive=TRUE);
+>  vec_names<-c("hp1a","HP1a","hp1c","HP1c","hp2","HP2","hp1b", "jil1", "nipB","PIAS","spt16","suvar","xnp"); # A vector of all the names of the proteins I am testing (doesn't include tech replicates)
+>  ## if change order need to modify naming below so captial letters can be written safely  
+>  for (i in 1:length(vec_names)) {
++  	test<-grep(vec_names[i], a);
++  	test1<-grep("control", a[test]);  # test[test1] is the index for the control
++  	test2<-grep("control", a[test], invert=TRUE);  # test[test2] is the index for the exp
++  	cont_foci<-read.table(a[test[test1]], header=TRUE); #Reads in control of vec_names
++  	exp_foci<-read.table(a[test[test2]], header=TRUE); #Reads in exp of vec_names
++  	results<-c()
++  	dir.create('/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt/Foci_Density_plots_of_both') # Use this to create new folders to better organize files
++  	dir.create('/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt/Foci_Histograms_of_both') # Use this to create new folders to better organize files
++  	for (k in 3:9) {
++  		if (k==3) {
++  			results<-ks.test(t(cont_foci[k]), t(exp_foci[k]));
++  			results<-results$p.value;
++  			results1<-wilcox.test(t(cont_foci[k]), t(exp_foci[k]),alternative="two.sided");
++  			results1<-results1$p.value;
++  			
++  			if (i==2|i==4|i==6) {
++  				which_hist<-paste("Foci_Histograms_of_both/", vec_names[i],"_CAP_",colnames(cont_foci[k]),"_grouped.tiff",sep="");
++  				which_hist1<-paste("Foci_Density_plots_of_both/","Density_",vec_names[i],"_CAP_",colnames(cont_foci[k]),"_grouped.tiff",sep="");
++  			} else {
++  				which_hist<-paste("Foci_Histograms_of_both/", vec_names[i],"_",colnames(cont_foci[k]),"_grouped.tiff",sep="");
++  				which_hist1<-paste("Foci_Density_plots_of_both/","Density_",vec_names[i],"_",colnames(cont_foci[k]),"_grouped.tiff",sep="");
++  			}
++  			tiff(file=which_hist);
++  			hist_title<-paste("Histogram for ",vec_names[i]," of ",colnames(cont_foci[k]), " grouped.red=cont",sep="");
++  			brk<-(max(cont_foci[k],exp_foci[k]) - min(cont_foci[k],exp_foci[k]))/100;
++  			brks<-seq(min(cont_foci[k],exp_foci[k]),max(cont_foci[k],exp_foci[k]), by=brk);
++  			xlm<-min(min(cont_foci[k]),min(exp_foci[k]));  ##  This line and next sets appropriate limits for histogram so all data is shown
++  			xlm<-append(xlm, max(max(cont_foci[k]),max(exp_foci[k])));
++ 			xlab1<-paste(colnames(cont_foci[k])," n_cont=",nrow(cont_foci[k]), "  n_exp=",nrow(exp_foci[k]), sep="");
++  			h_c<-hist(t(cont_foci[k]),breaks=brks, col="red",density=20,main=hist_title,xlim=xlm,xlab=xlab1);
++  			h_e<-hist(t(exp_foci[k]),breaks=brks,col="green",add=T,density=15,angle=135);  ########### When using add=T, it only includes the ylim and xlim from the first graph
++  			dev.off();
++  ####### Maybe make x and y axis fixed...........generate both?
++  
++  			tiff(file=which_hist1);
++  			hist_title<-paste("Density for ",vec_names[i]," of ",colnames(cont_foci[k]), " grouped.red=cont",sep="");
++  			h_c_d<-hist(t(cont_foci[k]),breaks=brks, col="red",density=20,main=hist_title,freq=FALSE,xlim=xlm, xlab=xlab1);
++  			lines(density(t(cont_foci[k])), col="red",lwd=3);
++  			h_e_d<-hist(t(exp_foci[k]),breaks=brks,col="green",add=T,density=15,angle=135,freq=FALSE);
++  			lines(density(t(exp_foci[k])), col="green",lwd=3);
++  			dev.off();
++  			
++  			pp<-cor.test(h_e$density,h_c$density,alternative="two.sided",method="pearson");
++  			pp_p<-pp$p.value;
++  			pp_c<-pp$estimate;
++  			r_pear_p<-pp_p;
++  			r_pear_c<-pp_c;
++  			
++  			
++  		} else {
++  			
++  			
++  			if (i==2|i==4|i==6) {
++  				which_hist<-paste("Foci_Histograms_of_both/", vec_names[i],"_CAP_",colnames(cont_foci[k]),"_grouped.tiff",sep="");
++  				which_hist1<-paste("Foci_Density_plots_of_both/","Density_",vec_names[i],"_CAP_",colnames(cont_foci[k]),"_grouped.tiff",sep="");
++  			} else {
++  				which_hist<-paste("Foci_Histograms_of_both/", vec_names[i],"_",colnames(cont_foci[k]),"_grouped.tiff",sep="");
++  				which_hist1<-paste("Foci_Density_plots_of_both/","Density_",vec_names[i],"_",colnames(cont_foci[k]),"_grouped.tiff",sep="");
++  			}
++  			tiff(file=which_hist);
++  			hist_title<-paste("Histogram for ",vec_names[i]," of ",colnames(cont_foci[k]), " grouped.red=cont",sep="");
++  			brk<-(max(cont_foci[k],exp_foci[k]) - min(cont_foci[k],exp_foci[k]))/100;
++  			brks<-seq(min(cont_foci[k],exp_foci[k]),max(cont_foci[k],exp_foci[k]), by=brk);
++  			xlm<-min(min(cont_foci[k]),min(exp_foci[k]));  ##  This line and next sets appropriate limits for histogram so all data is shown
++  			xlm<-append(xlm, max(max(cont_foci[k]),max(exp_foci[k])));
++ 			xlab1<-paste(colnames(cont_foci[k])," n_cont=",nrow(cont_foci[k]), "  n_exp=",nrow(exp_foci[k]), sep="");
++  			h_c<-hist(t(cont_foci[k]),breaks=brks, col="red",density=20,main=hist_title,xlim=xlm,xlab=xlab1);
++  			h_e<-hist(t(exp_foci[k]),breaks=brks,col="green",add=T,density=15,angle=135);
++  			dev.off();
++  			pp<-cor.test(h_e$density,h_c$density,alternative="two.sided",method="pearson");
++  			pp_p<-pp$p.value;
++  			pp_c<-pp$estimate;
++  			r_pear_p<-rbind(r_pear_p,pp_p);
++  			r_pear_c<-rbind(r_pear_c,pp_c);
++  	
++  			tiff(file=which_hist1);
++  			hist_title<-paste("Density for ",vec_names[i]," of ",colnames(cont_foci[k]), " grouped.red=cont",sep="");
++  			h_c_d<-hist(t(cont_foci[k]),breaks=brks, col="red",density=20,main=hist_title,freq=FALSE,xlim=xlm,xlab=xlab1);
++  			lines(density(t(cont_foci[k])), col="red",lwd=3);
++  			h_e_d<-hist(t(exp_foci[k]),breaks=brks,col="green",add=T,density=15,angle=135,freq=FALSE);
++  			lines(density(t(exp_foci[k])), col="green",lwd=3);
++  			dev.off();
++  			
++  			
++  			
++  			rr<-ks.test(t(cont_foci[k]), t(exp_foci[k]));
++  			rr<-rr$p.value;
++  			results<-rbind(results, rr);
++  			rr1<-wilcox.test(t(cont_foci[k]), t(exp_foci[k]),alternative="two.sided");
++  			rr1<-rr1$p.value;
++  			results1<-rbind(results1, rr1);
++  		}
++  	}
++  	all_test<-cbind(results,results1,r_pear_c,r_pear_p)
++  	colnames(all_test)<-c("ks p_value","wilcox p_value","pearson_cor","pearson p_value")
++  	rownames(all_test)<-colnames(cont_foci[3:9])
++  	if (i==2|i==4|i==6) {
++  		f_name<-paste("Foci_Density_plots_of_both/",vec_names[i],"_capital_", "foci_stats_test_results.csv", sep="")
++  	} else {
++  		f_name<-paste("Foci_Density_plots_of_both/",vec_names[i], "_foci_stats_test_results.csv", sep="")
++  	}
++  	write.table(all_test, file=f_name,row.names=colnames(cont_foci[3:9]),col.names=NA,sep=","); ## col.names=NA  lines up col.names properly when row.names=TRUE
++  }
+Error in file(file, "r") : cannot open the connection
+Calls: read.table -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file 'processed/fitc/foci_summary_hp1a_control.txt': No such file or directory
+Execution halted

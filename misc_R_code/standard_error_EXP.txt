@@ -1,0 +1,2 @@
+calculates the std.error for EXPNo documentation for 'std.error' in specified packages and libraries:
+you could try '??std.error'

@@ -1,0 +1,27 @@
+sink("stat_tests_above_and_less_or_equal_to_1.2.txt");
+ 
+contRdna_above_1.2 <- cont$Rdna[(cont$Rdna>1.2)];
+expRdna_above_1.2 <- exp$Rdna[(exp$Rdna>1.2)];
+print(shapiro.test(expRdna_above_1.2));
+print(shapiro.test(contRdna_above_1.2));
+print(t.test(contRdna_above_1.2,expRdna_above_1.2));
+print(wilcox.test(contRdna_above_1.2,expRdna_above_1.2));
+
+contRdna_at_or_below_1.2 <- cont$Rdna[(cont$Rdna<=1.2)];
+expRdna_at_or_below_1.2 <- exp$Rdna[(exp$Rdna<=1.2)];
+print(shapiro.test(expRdna_at_or_below_1.2));
+print(shapiro.test(contRdna_at_or_below_1.2));
+print(t.test(contRdna_at_or_below_1.2,expRdna_at_or_below_1.2));
+print(wilcox.test(contRdna_at_or_below_1.2,expRdna_at_or_below_1.2));
+
+sink();
+
+postscript("HP2_Rdna_above_1.2_boxplot.ps");
+boxplot(contRdna_above_1.2,expRdna_above_1.2);
+dev.off();
+
+postscript("HP2_Rdna_at_or_below_1.2_boxplot.ps");
+boxplot(contRdna_at_or_below_1.2,expRdna_at_or_below_1.2);
+dev.off();
+
+

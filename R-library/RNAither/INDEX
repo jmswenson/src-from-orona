@@ -1,0 +1,126 @@
+BScore                  BScore normalization
+DRQualControl           Computing the dynamic range
+LiWongRank              Li Wong rank / invariant probeset normalization
+MannWhitney             Perform a Mann-Whitney test
+RNAither-package        Statistical analysis of high-throughput RNAi
+                        screens
+RankProduct             Perform a Rank Product test
+SNRQualControl          Computing the SNR
+Ttest                   Perform a Student's t-test
+ZPRIMEQualControl       Computing the Z' factor
+ZScore                  ZScore normalization
+ZScorePerScreen         ZScore normalization per experiment
+ZScorePlot              Plot normalized intensity values per well
+ZScorePlotTwo           Plot signal intensities per well (II)
+channelPlot             Plot signal channels against each other
+closestToZero           Return the replicate value closest to zero
+compareHits             Searching for common hits between different
+                        scoring methods
+compareReplicaPlates    Compare replica plates
+compareReplicateSD      Plot the standard deviation of replicates
+compareReplicateSDPerScreen
+                        Plot the standard deviation of replicates for
+                        each experiment
+compareReplicates       Compare replicate values
+controlDensity          Plotting the control density
+controlDensityPerPlate
+                        Plotting the control density per plate
+controlDensityPerScreen
+                        Plotting the control density per experiment
+controlNorm             Normalization on controls
+createSubset            Creating a subset of a dataset according to a
+                        certain column value
+dataset                 a typical example RNAi dataset
+datasetDrosophila       Genome-wide RNAi screen of cell viability in
+                        Drosophila Kc167 cells by Boutros et al.
+discardLabtek           Remove a complete plate from the analysis
+discardWells            Remove wells from the analysis
+divNorm                 Mean, median, ... , normalization
+divideChannels          Divide channel values
+eraseDataSetColumn      Remove columns from dataset
+findReplicates          Find all replicates of a certain siRNA/gene in
+                        a dataset
+furthestFromZero        Return the replicate value furthest from zero
+generateDatasetFile     Generate Dataset File
+generateRepMatNoFilter
+                        Generate a matrix of replicates (II)
+generateReplicateMat    Generate a matrix of replicates
+gseaAnalysis            Perform a GSEA analysis of a list of genes
+header                  a typical header of an example RNAi dataset
+headerDrosophila        the header of the genome-wide RNAi screen of
+                        cell viability in Drosophila Kc167 cells by
+                        Boutros et al.
+hitselectionPval        Selecting hits according to p-values
+hitselectionZscore      Selecting hits according to ZScores
+hitselectionZscorePval
+                        Selecting hits according to ZScores and
+                        p-values
+incorporatepValVec      Incorporate a vector of p-values into a dataset
+indexSubset             Saving the indexes of a subset in the main
+                        dataset
+joinDatasetFiles        Join dataset files
+joinDatasets            Join datasets
+lowessNorm              Lowess normalization
+mainAnalysis            Wrapper function for full automated analysis
+makeBoxplot4PlateType   Generate a boxplot of the data per plate
+makeBoxplotControls     Generate a boxplot of the data vs. the controls
+makeBoxplotControlsPerPlate
+                        Generate a boxplot of the data vs. the controls
+                        for each plate
+makeBoxplotControlsPerScreen
+                        Generate a boxplot of the data vs. the controls
+                        for each experiment
+makeBoxplotPerPlate     Generate a boxplot of the data per plate
+makeBoxplotPerScreen    Generate a boxplot of the data per experiment
+multTestAdjust          Adjust p-values for multiple testing
+numCellQualControl      Quality control of the number of cells
+orderGeneIDs            Order a dataset
+pValVec1                A vector of p-values after a median
+                        normalization and a t-test
+pValVec2                A vector of p-values after a Mann-Whitney test
+percCellQualControl     Quality control of the percentage of cells
+plotBar                 Plot signal intensities per well
+plotControlHisto        Plot a histogram of the data values and
+                        controls
+plotControlHistoPerplate
+                        Plot a histogram of the data values and
+                        controls per plate
+plotControlHistoPerscreen
+                        Plot a histogram of the data values and
+                        controls per experiment
+plotHisto               Plot a histogram of the data values
+plotHistoPerplate       Plot a histogram of the data values per plate
+plotHistoPerscreen      Plot a histogram of the data values per
+                        experiment
+plotQQ                  Make a QQ plot
+plotQQperplate          Make a QQ plot per plate
+plotQQperscreen         Make a QQ plot per experiment
+quantileNormalization   Quantile normalization
+replicatesCV            Compute the correlation of variation (CV)
+replicatesSpearmancor   Compute the correlation coefficient betwenn
+                        replicates or experiments
+rms                     Compute the replicate root mean square
+rnaither                Wrapper function for full automated analysis
+saveDataset             Save the normalized dataset into a dataset text
+                        file
+saveOldIntensityColumns
+                        Save old intensity value columns
+savepValVec             Save p-values to file
+scoredDataset1          A dataset containing an additional column
+                        showing the p-values, after a median
+                        normalization and a t-test
+scoredDataset2          A dataset containing an additional column
+                        showing the p-values after a Mann-Whitney test
+spatialDistrib          Generate spatial plots of intensity values
+spatialDistribHits      Plotting the spatial distribution of the hits
+subtractBackground      Background substraction
+sumChannels             Summarize channels
+summarizeReps           Generate a new dataset with summarized
+                        replicates
+summarizeRepsNoFiltering
+                        Generate a new dataset with summarized
+                        replicates
+trim                    Compute the replicate mean with trimmed values
+varAdjust               Variance adjustment
+vennDiag                Plotting a Venn Diagram to compare hits
+volcanoPlot             Making a volcano plot

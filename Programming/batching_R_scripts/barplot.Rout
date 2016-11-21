@@ -1,0 +1,420 @@
+
+R version 2.9.2 (2009-08-24)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # source ("/Users/joel/Desktop/new_sylvain_my_R_analysis/barplot.R")
+> 
+> ############# NEED TO BE HERE:  /Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt
+> ############# NEED TO COMBINE NUC SUM AND FOCI SUM OR NEITHER FOR PROGRAM TO WORK  ----if combine, then need to trim headers after reading in table
+> ############# find . -type f -name "*nuc*sum*" -name "*control.txt" -print -exec /bin/cat '{}' >>ALL_COMBINED_nuc_summary_CONTROLS.txt \;
+> ############# find . -type f -name "*foci*sum*" -name "*control.txt" -print -exec /bin/cat '{}' >>ALL_COMBINED_foci_summary_CONTROLS.txt \;
+> ############# Can speed up program by changing write.table to cbind
+> ############# Need to modify skip<- to determine which histograms to skip
+> #############   vec_names<-c("hp1a","HP1a","hp1c","HP1c","hp2","HP2","hp1b", "jil1", "nipB","PIAS","spt16","suvar","xnp");   # A vector of all the names of the proteins I am testing (doesn't include tech replicates)
+> 
+> 
+> # add new columns to R_loops_etc and trim size_DB  mean_DB
+> 
+> 	# library(abind); # to make 3D arrays
+> 	library("plotrix");
+> 
+> 
+> 
+> 
+> a<-list.files(path="/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt",pattern="nuc_summary_",recursive=TRUE);
+> for (x in a)
++ 	{data<-read.table(x, header=TRUE);
++ 	title=x;
++ 	x;
++ 
++ # Code to get appropriate labels for graphs and filenames
++ xx<-strsplit(x,"nuc_summary_"); # splits string (x) after "nuc_summary_"      NOTE: .is any character and * is as many of the previous item...see help(grep) or help(regexp)
++ xx<-xx[[1]][2];
++ xxa<-strsplit(xx, ".txt");
++ xxr<-xxa[[1]][1]; # takes second item that was split and puts it in a new vector
++ 
++ 
++ data_trim<-data;
++ data_trim$image <- NULL;
++ data_trim$ID<-NULL;
++ 
++ ######## Code for trimming data based on distance from mean using SD
++ 
++ # trim_factor<-3;   ##### Trims datapoints 2 SDs away from the mean
++ # 
++ # # data_trim<-data[!is.na(data$ID),];
++ # data_trim<-data_trim[!is.na(data_trim$nfoci),];
++ # data_trim<-data_trim[!is.na(data_trim$n_size),];
++ # data_trim<-data_trim[!is.na(data_trim$foci_size),];
++ # data_trim<-data_trim[!is.na(data_trim$n_mean),];
++ # data_trim<-data_trim[!is.na(data_trim$f_mean),];
++ # data_trim<-data_trim[!is.na(data_trim$foci_mean),];
++ # data_trim<-data_trim[!is.na(data_trim$Rdna),];
++ # data_trim<-data_trim[!is.na(data_trim$Rgrad),];
++ # data_trim<-data_trim[!is.na(data_trim$foci_dist),];
++ # data_trim<-data_trim[!is.na(data_trim$numPfoci),];
++ # data_trim<-data_trim[!is.na(data_trim$numNfoci),];
++ # data_trim<-data_trim[!is.na(data_trim$size_DB),];
++ # data_trim<-data_trim[!is.na(data_trim$mean_DB),];
++ # data_trim<-data_trim[!is.na(data_trim$nuc_dist),];
++ # 
++ # 
++ # 
++ # mu<-lapply(data_trim,mean,na.rm=T);
++ # std<-lapply(data_trim,sd,na.rm=T);
++ # mu<-as.numeric(mu);
++ # std<-as.numeric(std);
++ # up_trim_value<-mu+trim_factor*std;
++ # low_trim_value<-mu-trim_factor*std;
++ # 
++ #  data_trim<-data_trim[data_trim$nfoci>=low_trim_value[1],];
++ #  data_trim<-data_trim[data_trim$n_size>=low_trim_value[2],];
++ #  data_trim<-data_trim[data_trim$foci_size>=low_trim_value[3],];
++ #  data_trim<-data_trim[data_trim$n_mean>=low_trim_value[4],];
++ #  data_trim<-data_trim[data_trim$f_mean>=low_trim_value[5],];
++ #  data_trim<-data_trim[data_trim$foci_mean>=low_trim_value[6],];
++ #  # data_trim<-data_trim[data_trim$Rdna>=low_trim_value[7],];
++ #  # data_trim<-data_trim[data_trim$Rgrad>=low_trim_value[8],];
++ #  data_trim<-data_trim[data_trim$foci_dist>=low_trim_value[9],];
++ #  # data_trim<-data_trim[data_trim$numPfoci>=low_trim_value[10],];
++ #  data_trim<-data_trim[data_trim$numNfoci>=low_trim_value[11],];
++ #  data_trim<-data_trim[data_trim$size_DB>=low_trim_value[12],];
++ #  data_trim<-data_trim[data_trim$mean_DB>=low_trim_value[13],];
++ #  data_trim<-data_trim[data_trim$nuc_dist>=low_trim_value[14],];
++ #  
++ # data_trim<-data_trim[data_trim$nfoci<=up_trim_value[1],];
++ # data_trim<-data_trim[data_trim$n_size<=up_trim_value[2],];
++ # data_trim<-data_trim[data_trim$foci_size<=up_trim_value[3],];
++ # data_trim<-data_trim[data_trim$n_mean<=up_trim_value[4],];  # Maybe comment this one out
++ # data_trim<-data_trim[data_trim$f_mean<=up_trim_value[5],];  # Maybe comment this one out
++ # data_trim<-data_trim[data_trim$foci_mean<=up_trim_value[6],];
++ # # data_trim<-data_trim[data_trim$Rdna<=up_trim_value[7],];
++ # # data_trim<-data_trim[data_trim$Rgrad<=up_trim_value[8],];
++ # data_trim<-data_trim[data_trim$foci_dist<=up_trim_value[9],];
++ # # data_trim<-data_trim[data_trim$numPfoci<=up_trim_value[10],];
++ # data_trim<-data_trim[data_trim$numNfoci<=up_trim_value[11],];
++ # data_trim<-data_trim[data_trim$size_DB<=up_trim_value[12],];
++ # data_trim<-data_trim[data_trim$mean_DB<=up_trim_value[13],];
++ # data_trim<-data_trim[data_trim$nuc_dist<=up_trim_value[14],];
++ # 
++ # 
++ #  cols=ncol(data_trim)
++ # 	for(i in 1:(cols)) {
++ # 		data_trim<-data_trim[!is.na(data_trim[i]),];
++ # #		data_trim<-data[data[i] < up_trim_value[i],];
++ # 	};
++ 
++ 
++ ####### END OF Code for trimming data based on distance from mean using SD and is.na
++ ###########   COMMENT OR UNCOMMENT BASED ON HOW YOU WANT TO TRIM
++ 
++ 
++  data_trim<-data_trim[!is.na(data_trim$nfoci),];
++  data_trim<-data_trim[!is.na(data_trim$n_size),];
++  data_trim<-data_trim[!is.na(data_trim$foci_size),];
++  data_trim<-data_trim[!is.na(data_trim$n_mean),];
++  data_trim<-data_trim[!is.na(data_trim$f_mean),];
++  data_trim<-data_trim[!is.na(data_trim$foci_mean),];
++  data_trim<-data_trim[!is.na(data_trim$Rdna),];
++  data_trim<-data_trim[!is.na(data_trim$Rgrad),];
++  data_trim<-data_trim[!is.na(data_trim$foci_dist),];
++  data_trim<-data_trim[!is.na(data_trim$numPfoci),];
++  data_trim<-data_trim[!is.na(data_trim$numNfoci),];
++  data_trim<-data_trim[!is.na(data_trim$size_DB),];
++  data_trim<-data_trim[!is.na(data_trim$mean_DB),];
++  data_trim<-data_trim[!is.na(data_trim$nuc_dist),];
++ 
++ ###############################################################
++ 
++ 
++ 
++ data_trim<-cbind(data_trim,(data_trim$size_DB)/(data_trim$n_size));   ####Gives perc volume of DAPI in DB
++ colnames(data_trim)[length(data_trim)]<-"vol_DB_div_vol_nuc";
++ 
++ data_trim<-cbind(data_trim,data_trim$size_DB*data_trim$mean_DB);   ####Gives total DAPI signal of DB
++ colnames(data_trim)[length(data_trim)]<-"size_DB_times_mean_DB";
++ 
++ data_trim<-cbind(data_trim,data_trim$n_size*data_trim$n_mean);   ####Gives total DAPI signal
++ colnames(data_trim)[length(data_trim)]<-"n_size_times_n_mean";
++ 
++ data_trim<-cbind(data_trim,(data_trim$size_DB*data_trim$mean_DB)/(data_trim$n_size*data_trim$n_mean));   ####Gives perc of total DAPI in DB
++ colnames(data_trim)[length(data_trim)]<-"total_DB_div_total_nuc";
++ 
++ numPfoci_div_by_nfoci<-data_trim$numPfoci/data_trim$nfoci;  ###Normalizes number of pos foci by number of foci in cell
++ data_trim<-cbind(data_trim,numPfoci_div_by_nfoci);
++ colnames(data_trim)[length(data_trim)]<-"numPfoci_div_by_nfoci";
++ 
++ Pfoci_theor_total_DAPI<-(data_trim$size_DB*data_trim$mean_DB)/(data_trim$n_size*data_trim$n_mean);
++ data_trim<-cbind(data_trim,Pfoci_theor_total_DAPI);
++ colnames(data_trim)[length(data_trim)]<-"Pfoci_theor_total_DAPI";
++ 
++ Pfoci_theor_DAPI_vol<-(data_trim$size_DB)/(data_trim$n_size);
++ data_trim<-cbind(data_trim,Pfoci_theor_DAPI_vol);
++ colnames(data_trim)[length(data_trim)]<-"Pfoci_theor_DAPI_vol";
++ 
++ actualP_div_theorP_total_DAPI<-numPfoci_div_by_nfoci/Pfoci_theor_total_DAPI;
++ data_trim<-cbind(data_trim, actualP_div_theorP_total_DAPI);
++ colnames(data_trim)[length(data_trim)]<-"actualP_div_theorP_total_DAPI";
++ 
++ actualP_div_theorP_DAPI_vol<-numPfoci_div_by_nfoci/Pfoci_theor_DAPI_vol;
++ data_trim<-cbind(data_trim, actualP_div_theorP_DAPI_vol);
++ colnames(data_trim)[length(data_trim)]<-"actualP_div_theorP_DAPI_vol";
++ 
++ data_trim<-cbind(data_trim, data_trim$foci_dist/data_trim$n_size); # normalizes foci dist against the size of the nucleus
++ colnames(data_trim)[length(data_trim)]<-"foci_dist_div_n_size";
++ 
++ data_trim<-cbind(data_trim, data_trim$foci_dist/data_trim$size_DB); # normalizes foci dist against the size of the DB
++ colnames(data_trim)[length(data_trim)]<-"foci_dist_div_size_DB";
++ 
++ data_trim<-cbind(data_trim,nrow(data_trim));  # Adds number of nuclei counted for that experiment to the end of data_trim
++ colnames(data_trim)[length(data_trim)]<-"num_nuc_counted";  
++ 
++ 
++ 
++ 
++ mu<-lapply(data_trim, mean);
++ ## mu<-append(mu,nrow(data_trim));  # Adds number of nuclei counted for that experiment to the end of mu
++ std<-lapply(data_trim, sd);
++ std_err<-lapply(data_trim, std.error);
++ 
++ 
++ 
++ 
++ 
++ 	if (x==a[1]){
++ 	write.table(mu, file="test_table.csv",row.names=FALSE,col.names=TRUE,sep=",")
++ 	write.table(std, file="std_table.csv",row.names=FALSE,col.names=TRUE,sep=",")
++ 	write.table(std_err, file="std_err_table.csv",row.names=FALSE,col.names=TRUE,sep=",")
++ 	} else { 
++ 	write.table(mu, file="test_table.csv",append=T,row.names=FALSE,col.names=FALSE,sep=",")
++ 	write.table(std, file="std_table.csv",append=T,row.names=FALSE,col.names=FALSE,sep=",")
++ 	write.table(std_err, file="std_err_table.csv",append=T,row.names=FALSE,col.names=FALSE,sep=",")
++ 	}
++ 
++ mu_tab<-read.table("/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt/test_table.csv",header=TRUE, sep=",");
++ std_tab<-read.table("/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt/std_table.csv",header=TRUE, sep=",");
++ std_err_tab<-read.table("/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt/std_err_table.csv",header=TRUE, sep=",");
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ ##########  MAKE BREAKS FOR HISTOGRAMS.......SEE CODE IN PROGRESS
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ # Code to skip histograms !!!
++ skip<-1   #0 means it makes histograms, 1 means it does not
++ if (skip==0) {
++ 
++ ## MAKES HISTOGRAMS for Nuc Summary
++ ######### Think about how you want to do breaks and if you want to lock x-axis by column i.e. if (col_names[i]==colnames[1]) { 
++ 
++ col_names<-colnames(data_trim);
++ 
++ 	for (i in 1:length(data_trim)) {
++ 	which_hist<-paste(xxr,"_",col_names[i],".tiff",sep="");
++ 	my_breaks<-(length(data_trim[,i]));
++ 	tiff(file=which_hist);
++ 	hist_title<-paste("Histogram for ",xxr," of ",col_names[i],sep="");
++ 	hist(data_trim[,i], breaks=my_breaks, main=hist_title);
++ 	dev.off();
++ }
++ 
++ 
++ #############  MAKES HISTOGRAMS WITH FIXED AXIS for Nuc Summary
++ col_names<-colnames(data_trim);
++ 
++ 	for (i in 1:length(data_trim)) {
++ 	which_hist<-paste(xxr,"_",col_names[i],"_FIXED_AXIS.tiff",sep="");
++ 	my_breaks<-(length(data_trim[,i])); # Can multiple this by a constant such as 10 to get 10 points per break
++ 	tiff(file=which_hist);
++ 		if (col_names[i]=="nfoci") {
++ 			xlim_t<-c(0,100); ylim_t<-c(0,15)}
++ 		if (col_names[i]=="n_size") {
++ 			xlim_t<-c(0,2e5); ylim_t<-c(0,10)}
++ 		if (col_names[i]=="foci_size") {
++ 			xlim_t<-c(0,200); ylim_t<-c(0,6)}
++ 		if (col_names[i]=="n_mean") {
++ 			xlim_t<-c(200, 1200); ylim_t<-c(0,12)}
++ 		if (col_names[i]=="f_mean") {
++ 			xlim_t<-c(0, 250); ylim_t<-c(0,14)}
++ 		if (col_names[i]=="foci_mean") {
++ 			xlim_t<-c(0, 1750); ylim_t<-c(0,6)}
++ 		if (col_names[i]=="Rdna") {
++ 			xlim_t<-c(0.8, 1.6); ylim_t<-c(0,8)}
++ 		if (col_names[i]=="Rgrad") {
++ 			xlim_t<-c(0.6, 1.6); ylim_t<-c(0,8)}
++ 		if (col_names[i]=="foci_dist") {
++ 			xlim_t<-c(-30,15); ylim_t<-c(0,8)}
++ 		if (col_names[i]=="numPfoci") {
++ 			xlim_t<-c(0,1); ylim_t<-c(0,350)}
++ 		if (col_names[i]=="numNfoci") {
++ 			xlim_t<-c(0,75); ylim_t<-c(0,15)}
++ 		if (col_names[i]=="nuc_dist") {
++ 			xlim_t<-c(2,12); ylim_t<-c(0,8)}
++ 		if (col_names[i]=="numPfoci_div_by_nfoci") {
++ 			xlim_t<-c(0,10); ylim_t<-c(0,10)}
++ 		if (col_names[i]=="Pfoci_theor_total_DAPI") {
++ 			xlim_t<-c(0,10); ylim_t<-c(0,10)}	
++ 		if (col_names[i]=="actualP_div_theorP") {
++ 			xlim_t<-c(0,10); ylim_t<-c(0,10)}	
++ 		if (col_names[i]=="n_size_times_n_mean") {
++ 			xlim_t<-c(0,1.5e+08); ylim_t<-c(0,10)}	
++ 		if (col_names[i]=="foci_dist_div_n_size") {
++ 			xlim_t<-c(0,10); ylim_t<-c(0,10)}		
++ 		if (col_names[i]=="num_nuc_counted") {
++ 			xlim_t<-c(0,10); ylim_t<-c(0,10)}      ###############################   SET FIXED AXIS FOR OTHERS
++ 	hist_title<-paste("Histogram for ",xxr," of ",col_names[i]," WITH FIXED AXIS",sep="");
++ 	hist(data_trim[,i], breaks=my_breaks, main=hist_title, xlim=xlim_t, ylim=ylim_t);
++ 	dev.off();
++ }
++ }
++ 
++ 
++ ### READ in fitc_summary to data_foci
++ 
++ #### When determining how many per nuclei need to make sure this is a correct way of doing it
++ #### TRIM NAs away and remove certain columns
++ 
++ 	aa_foci<-strsplit(x,"nuc_summary_");
++ 	x_foci<-paste(aa_foci[[1]][1],"foci_summary_", aa_foci[[1]][2],sep="")
++ 	data_foci<-read.table(x_foci, header=TRUE)  #### FIX THIS...CAN USE STRSPLIT ON IMAGE FILE AND THEN THE DIFF COMMAND (SEE E-MAIL FROM SYLVAIN)
++ 	
++ 	data_foci<-data_foci[!is.na(data_foci$nuc_dist),];
++ 	data_foci<-data_foci[!is.na(data_foci$foci_size),];
++ 	data_foci<-data_foci[!is.na(data_foci$foci_mean),];
++ 	data_foci<-data_foci[!is.na(data_foci$nfoci_mean),];
++ 	data_foci<-data_foci[!is.na(data_foci$Rdna),];
++ 	data_foci<-data_foci[!is.na(data_foci$Rgrad),];
++ 	
++ 
++ 
++ 
++ # Use foci summary to get distributions (via histogram) of foci distance....can also do kendall test (or ks-test...see Sylvain) to test how similar they are to each other
++ 
++ # Code to skip
++ skip<-0 #0 means it makes histograms, 1 means it does not
++ if (skip==0) {
++ ### HISTOGRAMS OF FOCI SUMMARY with FIXED AXIS
++ col_names1<-colnames(data_foci);
++ 	for (i in 3:9) {
++ 	which_hist<-paste("f_summary_FIXED_AXIS_", xxr, "_", col_names1[i],".tiff",sep="");
++ 	my_breaks<-(length(data_foci[,i]));
++ 	tiff(file=which_hist);
++ 	if (i==3) {
++ 		xlim_t1<-c(-60, 10);
++ 		ylim_t1<-c(0, 0.05)} # Foci_dist
++ 	if (i==4) {
++ 		xlim_t1<-c(0, 40);
++ 		ylim_t1<-c(0, 0.1)}  # nuc_dist
++ 	if (i==5) {
++ 		xlim_t1<-c(0, 500);
++ 		ylim_t1<-c(0, 0.02)}  # foci_size
++ 	if (i==6) {
++ 		xlim_t1<-c(0, 4000);
++ 		ylim_t1<-c(0, 0.003)}  # Foci_mean
++ 	if (i==7) {
++ 		xlim_t1<-c(0, 3000);
++ 		ylim_t1<-c(0, 0.003)}  # nfoci_mean
++ 	if (i==8) {
++ 		xlim_t1<-c(0, 10);
++ 		ylim_t1<-c(0, 0.7)}  # Rdna
++ 	if (i==9) {
++ 		xlim_t1<-c(0, 8);
++ 		ylim_t1<-c(0, 1.0)}  # Rgrad
++ 	hist_title<-paste("Fixed Axis for Foci Summary Histogram for ",xxr," of ",col_names1[i],sep="");
++ 	hist(data_foci[,i], main=hist_title,xlim=xlim_t1, ylim=ylim_t1, freq=FALSE); # If take out freq=FALSE then put in breaks=my_breaks, # when freq=FALSE Gives probability distribution....bars are scaled to sum to one
++ 	lines(density(data_foci[,i]), col="red");   # http://www2.warwick.ac.uk/fac/sci/moac/degrees/modules/ch923/r_introduction/histograms_etc/
++ 	dev.off();
++ }
++ }
++ 
++ ####### How to find the highest point on the y-axis of histogram when freq=FALSE.....usefull if I ever switch to 3D arrays
++ #> x<-density(data_foci$foci_dist)
++ #> max(x$y)
++ #[1] 0.03637958
++ 
++ 
++ 
++ # Code to skip
++ skip<-1 #0 means it makes histograms, 1 means it does not
++ if (skip==0) {
++ ### HISTOGRAMS OF FOCI SUMMARY
++ col_names1<-colnames(data_foci);
++ 	for (i in 3:9) {
++ 	which_hist<-paste("f_summary_", xxr, "_", col_names1[i],".tiff",sep="");
++ 	my_breaks<-(length(data_foci[,i]));
++ 	tiff(file=which_hist);
++ 	hist_title<-paste("Foci Summary Histogram for ",xxr," of ",col_names1[i],sep="");
++ 	hist(data_foci[,i], main=hist_title,freq=FALSE); # If take out freq=FALSE then put in breaks=my_breaks, # when freq=FALSE Gives probability distribution....bars are scaled to sum to one
++ 	lines(density(data_foci[,i]), col="red");   # http://www2.warwick.ac.uk/fac/sci/moac/degrees/modules/ch923/r_introduction/histograms_etc/
++ 	dev.off();
++ }
++ }
++ 
++ 
++ 
++ 
++ 
++ 	
++ 
++ ######  Don't really need this step if use sum instead of length 12 lines down
++ 	for (k in 10:4) {      
++ 		data_foci[k]<-NULL}
++ 	data_foci$foci_ID<-NULL;
++ 	data_foci$nuc_ID<-NULL;
++ 
++ 	
++ 	
++ 	p_foci_per_nuc<-c()
++ 	for (k in 1:10) {
++ 		if (x==a[1]) { 	if (k==1) {		col.names<-c() }else{}}else{}
++ 		d_p_length<-length(data_trim)
++ 		p<-((k-1)*(-2))
++ 		p_foci_per_nuc[k]<-sum(data_foci$foci_dist>p,na.rm=T)/nrow(data_trim)  # Number of foci within p distance of DAPI bright per cell
++ 		if (k==5) {
++ 			if (x==a[1]) {
++ 				row.names<-c()
++ 				row.names<-xxr
++ 				} else {
++ 				row.names<-cbind(row.names,xxr)
++ 				}
++ 			} else {}
++ 		col.names[k]<-p
++ 		}
++ 	if (x==a[1]) {
++ 		p_foci<-t(p_foci_per_nuc)
++ 		} else {
++ 		p_foci<-rbind(p_foci, t(p_foci_per_nuc))
++ 		}
++ }
+Error in file(file, "r") : cannot open the connection
+Calls: read.table -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file 'processed/fitc/nuc_summary_HP1a_control_tech.txt': No such file or directory
+Execution halted

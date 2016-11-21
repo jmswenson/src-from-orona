@@ -1,0 +1,28 @@
+# cd /Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/
+# source("file_name")      source("stats_sylvain_absolute_number_extract_values.txt")
+# Set threshold for group
+# Need to figure out how to not basis this towards sample with higher n
+
+# sink("test")
+thr <- 1.2;
+
+# Process control
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/PIAS_control/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(cont$Rdna,by=list(cont$NucID,cont$Filename),FUN=mean) # calculates mean of cont$Rdna for each NudID within a give Filename and creates a variable with the columns cont$NucID,cont$Filename and the mean of cont$Rdna
+pos_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1); # creates a vector with value 0 with dimensions of row = aggRdna$Group.1 and columns = 1 ....this is ultimately done to give the matrix the desired dimensions
+total_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>thr)); # cont$NucID==aggRdna$Group.1[i] checks if the vector NucID is equal to the i element of the vector aggRdna$Group.1     basically when i=1 this returns a value of TRUE for every NucID equal to 1 in the vector cont$NucID.            & means if the first part is true evaluate the next part,             so cont$Filename==aggRdna$Group.2[i] checks if the vector Filename is equal to the i element of the vector aggRdna$Group.2 (which is the filename column)    basically when i=1 this returns a value of TRUE for values in the vector cont$Filename = to the first element in aggRdna$Group.2           if both of these elements are true for i=1 it means it is NucID 1 in the first filename       if both of those elements are true now is cont$Rdna.thr              sum
+pos_Rdna_value[i] <- mult((cont$NucID==aggRdna$Group.1[i])*(cont$Filename==aggRdna$Group.2[i])*(cont$Rdna>thr)*cont$Rdna);
+
+for (i in 1:length(aggRdna$Group.1))
+total_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>0));
+
+Perc_pos_Rdna_cont = pos_RdnaC*100; # number of foci above thr per 100 nuclei
+
+contRdna <- cont$Rdna[(cont$Rdna>thr)];
+expRdna <- exp$Rdna[(exp$Rdna>thr)];
+boxplot(contRdna,expRdna);
+t.test(contRdna,expRdna);
+# sink();

@@ -1,0 +1,62 @@
+
+	Shapiro-Wilk normality test
+
+data:  expRdna_above_1.200 
+W = 0.7061, p-value < 2.2e-16
+
+
+	Shapiro-Wilk normality test
+
+data:  contRdna_above_1.200 
+W = 0.7566, p-value < 2.2e-16
+
+
+	Welch Two Sample t-test
+
+data:  contRdna_above_1.200 and expRdna_above_1.200 
+t = -1.0721, df = 1652.555, p-value = 0.2838
+alternative hypothesis: true difference in means is not equal to 0 
+95 percent confidence interval:
+ -0.04005883  0.01174382 
+sample estimates:
+mean of x mean of y 
+ 1.437416  1.451573 
+
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  contRdna_above_1.200 and expRdna_above_1.200 
+W = 338154, p-value = 0.1701
+alternative hypothesis: true location shift is not equal to 0 
+
+
+	Shapiro-Wilk normality test
+
+data:  expRdna_at_or_below_1.200 
+W = 0.9663, p-value < 2.2e-16
+
+
+	Shapiro-Wilk normality test
+
+data:  contRdna_at_or_below_1.200 
+W = 0.9735, p-value < 2.2e-16
+
+
+	Welch Two Sample t-test
+
+data:  contRdna_at_or_below_1.200 and expRdna_at_or_below_1.200 
+t = -6.2717, df = 3517.311, p-value = 4.004e-10
+alternative hypothesis: true difference in means is not equal to 0 
+95 percent confidence interval:
+ -0.04036655 -0.02113898 
+sample estimates:
+mean of x mean of y 
+0.9510241 0.9817769 
+
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  contRdna_at_or_below_1.200 and expRdna_at_or_below_1.200 
+W = 1369016, p-value = 3.711e-09
+alternative hypothesis: true location shift is not equal to 0 
+

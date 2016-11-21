@@ -1,0 +1,22 @@
+###########################################################
+ngs.plot: Quick mining and visualization of next-generation 
+sequencing data by integrating genomic databases
+
+Li Shen, li.shen@mssm.edu or shenli.sam@gmail.com
+Icahn School of Medicine at Mount Sinai
+###########################################################
+
+BRIEF:
+------
+The program options can be displayed when you type the program name (such as 
+ngs.plot.r) without any argument. There are some toy examples under the 
+"example" folder. Please also read "example/README.txt". To run those toy 
+examples, you need to download the bam files -  example.bam.tar.gz (~180MB) 
+from ngsplot's website. 
+
+For detailed instructions, please refer to our online manual: 
+
+https://code.google.com/p/ngsplot/
+
+Enjoy!
+

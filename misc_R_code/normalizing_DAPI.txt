@@ -1,0 +1,45 @@
+
+
+
+xnp_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/xnp_control/processed/fitc/foci_summary.txt",header = TRUE);
+xnp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/xnp/processed/fitc/foci_summary.txt",header = TRUE);
+suvar3_9_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/suvar3_9_control/processed/fitc/foci_summary.txt",header = TRUE);
+suvar3_9 <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/suvar3_9/processed/fitc/foci_summary.txt",header = TRUE);
+spt16_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/spt16_control/processed/fitc/foci_summary.txt",header = TRUE);
+spt16 <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/spt16/processed/fitc/foci_summary.txt",header = TRUE);
+PIAS_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/PIAS_control/processed/fitc/foci_summary.txt",header = TRUE);
+PIAS <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/PIAS/processed/fitc/foci_summary.txt",header = TRUE);
+nipB_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/nipB_control/processed/fitc/foci_summary.txt",header = TRUE);
+nipB <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/nipB/processed/fitc/foci_summary.txt",header = TRUE);
+jmjd2a_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/jmjd2a_control/processed/fitc/foci_summary.txt",header = TRUE);
+jmjd2a <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/jmjd2a/processed/fitc/foci_summary.txt",header = TRUE);
+jil1_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/jil1_control/processed/fitc/foci_summary.txt",header = TRUE);
+jil1 <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/jil1/processed/fitc/foci_summary.txt",header = TRUE);
+HP2_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/foci_summary.txt",header = TRUE);
+HP2 <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/foci_summary.txt",header = TRUE);
+hp1c_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/hp1c_control/processed/fitc/foci_summary.txt",header = TRUE);
+hp1c <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/hp1c/processed/fitc/foci_summary.txt",header = TRUE);
+HP1a_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/hp1a_control/processed/fitc/foci_summary.txt",header = TRUE);
+HP1a <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/hp1a/processed/fitc/foci_summary.txt",header = TRUE);
+brama_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/brama_control/processed/fitc/foci_summary.txt",header = TRUE);
+brama <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/brama/processed/fitc/foci_summary.txt",header = TRUE);
+
+xnp<-(xnp_control$NucArea*xnp_control$MeanNucDapi)/mean(xnp_control$NucArea*xnp_control$MeanNucDapi);
+suvar3_9<-(suvar3_9_control$NucArea*suvar3_9_control$MeanNucDapi)/mean(suvar3_9_control$NucArea*suvar3_9_control$MeanNucDapi);
+spt16<-(spt16_control$NucArea*spt16_control$MeanNucDapi)/mean(spt16_control$NucArea*spt16_control$MeanNucDapi);
+PIAS<-(PIAS_control$NucArea*PIAS_control$MeanNucDapi)/mean(PIAS_control$NucArea*PIAS_control$MeanNucDapi);
+nipB<-(nipB_control$NucArea*nipB_control$MeanNucDapi)/mean(nipB_control$NucArea*nipB_control$MeanNucDapi);
+jmjd2a<-(jmjd2a_control$NucArea*jmjd2a_control$MeanNucDapi)/mean(jmjd2a_control$NucArea*jmjd2a_control$MeanNucDapi);
+jil1<-(jil1_control$NucArea*jil1_control$MeanNucDapi)/mean(jil1_control$NucArea*jil1_control$MeanNucDapi);
+HP2<-(HP2_control$NucArea*HP2_control$MeanNucDapi)/mean(HP2_control$NucArea*HP2_control$MeanNucDapi);
+hp1a<-(hp1a_control$NucArea*hp1a_control$MeanNucDapi)/mean(hp1a_control$NucArea*hp1a_control$MeanNucDapi);
+
+postscript("total_dapi_EXP_control_normalized.ps");
+hist(EXP, col="blue", breaks = 100, freq=FALSE, main ="Histogram of total DAPI of EXP control after dividing by the average", xlab="Total DAPI");
+lines(density(x), col="red");
+dev.off();
+
+
+
+
+

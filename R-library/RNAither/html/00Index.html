@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Statistical analysis of high-throughput RNAi screens</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+<h1> Statistical analysis of high-throughput RNAi screens
+<img class="toplogo" src="../../../doc/html/logo.jpg" alt="[R logo]">
+</h1>
+<hr>
+<div align="center">
+<a href="../../../doc/html/packages.html"><img src="../../../doc/html/left.jpg" alt="[Up]" width="30" height="30" border="0"></a>
+<a href="../../../doc/html/index.html"><img src="../../../doc/html/up.jpg" alt="[Top]" width="30" height="30" border="0"></a>
+</div><h2>Documentation for package &lsquo;RNAither&rsquo; version 2.4.0</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">Overview of user guides and package vignettes</a>; browse <a href="../doc">directory</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table width="100%">
+<tr><td width="25%"><a href="RNAither-package.html">RNAither-package</a></td>
+<td>Statistical analysis of high-throughput RNAi screens</td></tr>
+<tr><td width="25%"><a href="BScore.html">BScore</a></td>
+<td>BScore normalization</td></tr>
+<tr><td width="25%"><a href="channelPlot.html">channelPlot</a></td>
+<td>Plot signal channels against each other</td></tr>
+<tr><td width="25%"><a href="closestToZero.html">closestToZero</a></td>
+<td>Return the replicate value closest to zero</td></tr>
+<tr><td width="25%"><a href="compareHits.html">compareHits</a></td>
+<td>Searching for common hits between different scoring methods</td></tr>
+<tr><td width="25%"><a href="compareReplicaPlates.html">compareReplicaPlates</a></td>
+<td>Compare replica plates</td></tr>
+<tr><td width="25%"><a href="compareReplicates.html">compareReplicates</a></td>
+<td>Compare replicate values</td></tr>
+<tr><td width="25%"><a href="compareReplicateSD.html">compareReplicateSD</a></td>
+<td>Plot the standard deviation of replicates</td></tr>
+<tr><td width="25%"><a href="compareReplicateSDPerScreen.html">compareReplicateSDPerScreen</a></td>
+<td>Plot the standard deviation of replicates for each experiment</td></tr>
+<tr><td width="25%"><a href="controlDensity.html">controlDensity</a></td>
+<td>Plotting the control density</td></tr>
+<tr><td width="25%"><a href="controlDensityPerPlate.html">controlDensityPerPlate</a></td>
+<td>Plotting the control density per plate</td></tr>
+<tr><td width="25%"><a href="controlDensityPerScreen.html">controlDensityPerScreen</a></td>
+<td>Plotting the control density per experiment</td></tr>
+<tr><td width="25%"><a href="controlNorm.html">controlNorm</a></td>
+<td>Normalization on controls</td></tr>
+<tr><td width="25%"><a href="createSubset.html">createSubset</a></td>
+<td>Creating a subset of a dataset according to a certain column value</td></tr>
+<tr><td width="25%"><a href="dataset.html">dataset</a></td>
+<td>a typical example RNAi dataset</td></tr>
+<tr><td width="25%"><a href="datasetDrosophila.html">datasetDrosophila</a></td>
+<td>Genome-wide RNAi screen of cell viability in Drosophila Kc167 cells by Boutros et al.</td></tr>
+<tr><td width="25%"><a href="discardLabtek.html">discardLabtek</a></td>
+<td>Remove a complete plate from the analysis</td></tr>
+<tr><td width="25%"><a href="discardWells.html">discardWells</a></td>
+<td>Remove wells from the analysis</td></tr>
+<tr><td width="25%"><a href="divideChannels.html">divideChannels</a></td>
+<td>Divide channel values</td></tr>
+<tr><td width="25%"><a href="divNorm.html">divNorm</a></td>
+<td>Mean, median, ... , normalization</td></tr>
+<tr><td width="25%"><a href="DRQualControl.html">DRQualControl</a></td>
+<td>Computing the dynamic range</td></tr>
+<tr><td width="25%"><a href="eraseDataSetColumn.html">eraseDataSetColumn</a></td>
+<td>Remove columns from dataset</td></tr>
+<tr><td width="25%"><a href="findReplicates.html">findReplicates</a></td>
+<td>Find all replicates of a certain siRNA/gene in a dataset</td></tr>
+<tr><td width="25%"><a href="furthestFromZero.html">furthestFromZero</a></td>
+<td>Return the replicate value furthest from zero</td></tr>
+<tr><td width="25%"><a href="generateDatasetFile.html">generateDatasetFile</a></td>
+<td>Generate Dataset File</td></tr>
+<tr><td width="25%"><a href="generateReplicateMat.html">generateReplicateMat</a></td>
+<td>Generate a matrix of replicates</td></tr>
+<tr><td width="25%"><a href="generateRepMatNoFilter.html">generateRepMatNoFilter</a></td>
+<td>Generate a matrix of replicates (II)</td></tr>
+<tr><td width="25%"><a href="gseaAnalysis.html">gseaAnalysis</a></td>
+<td>Perform a GSEA analysis of a list of genes</td></tr>
+<tr><td width="25%"><a href="header.html">header</a></td>
+<td>a typical header of an example RNAi dataset</td></tr>
+<tr><td width="25%"><a href="headerDrosophila.html">headerDrosophila</a></td>
+<td>the header of the genome-wide RNAi screen of cell viability in Drosophila Kc167 cells by Boutros et al.</td></tr>
+<tr><td width="25%"><a href="hitselectionPval.html">hitselectionPval</a></td>
+<td>Selecting hits according to p-values</td></tr>
+<tr><td width="25%"><a href="hitselectionZscore.html">hitselectionZscore</a></td>
+<td>Selecting hits according to ZScores</td></tr>
+<tr><td width="25%"><a href="hitselectionZscorePval.html">hitselectionZscorePval</a></td>
+<td>Selecting hits according to ZScores and p-values</td></tr>
+<tr><td width="25%"><a href="incorporatepValVec.html">incorporatepValVec</a></td>
+<td>Incorporate a vector of p-values into a dataset</td></tr>
+<tr><td width="25%"><a href="indexSubset.html">indexSubset</a></td>
+<td>Saving the indexes of a subset in the main dataset</td></tr>
+<tr><td width="25%"><a href="joinDatasetFiles.html">joinDatasetFiles</a></td>
+<td>Join dataset files</td></tr>
+<tr><td width="25%"><a href="joinDatasets.html">joinDatasets</a></td>
+<td>Join datasets</td></tr>
+<tr><td width="25%"><a href="LiWongRank.html">LiWongRank</a></td>
+<td>Li Wong rank / invariant probeset normalization</td></tr>
+<tr><td width="25%"><a href="lowessNorm.html">lowessNorm</a></td>
+<td>Lowess normalization</td></tr>
+<tr><td width="25%"><a href="mainAnalysis.html">mainAnalysis</a></td>
+<td>Wrapper function for full automated analysis</td></tr>
+<tr><td width="25%"><a href="makeBoxplot4PlateType.html">makeBoxplot4PlateType</a></td>
+<td>Generate a boxplot of the data per plate</td></tr>
+<tr><td width="25%"><a href="makeBoxplotControls.html">makeBoxplotControls</a></td>
+<td>Generate a boxplot of the data vs. the controls</td></tr>
+<tr><td width="25%"><a href="makeBoxplotControlsPerPlate.html">makeBoxplotControlsPerPlate</a></td>
+<td>Generate a boxplot of the data vs. the controls for each plate</td></tr>
+<tr><td width="25%"><a href="makeBoxplotControlsPerScreen.html">makeBoxplotControlsPerScreen</a></td>
+<td>Generate a boxplot of the data vs. the controls for each experiment</td></tr>
+<tr><td width="25%"><a href="makeBoxplotPerPlate.html">makeBoxplotPerPlate</a></td>
+<td>Generate a boxplot of the data per plate</td></tr>
+<tr><td width="25%"><a href="makeBoxplotPerScreen.html">makeBoxplotPerScreen</a></td>
+<td>Generate a boxplot of the data per experiment</td></tr>
+<tr><td width="25%"><a href="MannWhitney.html">MannWhitney</a></td>
+<td>Perform a Mann-Whitney test</td></tr>
+<tr><td width="25%"><a href="multTestAdjust.html">multTestAdjust</a></td>
+<td>Adjust p-values for multiple testing</td></tr>
+<tr><td width="25%"><a href="numCellQualControl.html">numCellQualControl</a></td>
+<td>Quality control of the number of cells</td></tr>
+<tr><td width="25%"><a href="orderGeneIDs.html">orderGeneIDs</a></td>
+<td>Order a dataset</td></tr>
+<tr><td width="25%"><a href="percCellQualControl.html">percCellQualControl</a></td>
+<td>Quality control of the percentage of cells</td></tr>
+<tr><td width="25%"><a href="plotBar.html">plotBar</a></td>
+<td>Plot signal intensities per well</td></tr>
+<tr><td width="25%"><a href="plotControlHisto.html">plotControlHisto</a></td>
+<td>Plot a histogram of the data values and controls</td></tr>
+<tr><td width="25%"><a href="plotControlHistoPerplate.html">plotControlHistoPerplate</a></td>
+<td>Plot a histogram of the data values and controls per plate</td></tr>
+<tr><td width="25%"><a href="plotControlHistoPerscreen.html">plotControlHistoPerscreen</a></td>
+<td>Plot a histogram of the data values and controls per experiment</td></tr>
+<tr><td width="25%"><a href="plotHisto.html">plotHisto</a></td>
+<td>Plot a histogram of the data values</td></tr>
+<tr><td width="25%"><a href="plotHistoPerplate.html">plotHistoPerplate</a></td>
+<td>Plot a histogram of the data values per plate</td></tr>
+<tr><td width="25%"><a href="plotHistoPerscreen.html">plotHistoPerscreen</a></td>
+<td>Plot a histogram of the data values per experiment</td></tr>
+<tr><td width="25%"><a href="plotQQ.html">plotQQ</a></td>
+<td>Make a QQ plot</td></tr>
+<tr><td width="25%"><a href="plotQQperplate.html">plotQQperplate</a></td>
+<td>Make a QQ plot per plate</td></tr>
+<tr><td width="25%"><a href="plotQQperscreen.html">plotQQperscreen</a></td>
+<td>Make a QQ plot per experiment</td></tr>
+<tr><td width="25%"><a href="pValVec1.html">pValVec1</a></td>
+<td>A vector of p-values after a median normalization and a t-test</td></tr>
+<tr><td width="25%"><a href="pValVec2.html">pValVec2</a></td>
+<td>A vector of p-values after a Mann-Whitney test</td></tr>
+<tr><td width="25%"><a href="quantileNormalization.html">quantileNormalization</a></td>
+<td>Quantile normalization</td></tr>
+<tr><td width="25%"><a href="RankProduct.html">RankProduct</a></td>
+<td>Perform a Rank Product test</td></tr>
+<tr><td width="25%"><a href="replicatesCV.html">replicatesCV</a></td>
+<td>Compute the correlation of variation (CV)</td></tr>
+<tr><td width="25%"><a href="replicatesSpearmancor.html">replicatesSpearmancor</a></td>
+<td>Compute the correlation coefficient betwenn replicates or experiments</td></tr>
+<tr><td width="25%"><a href="rms.html">rms</a></td>
+<td>Compute the replicate root mean square</td></tr>
+<tr><td width="25%"><a href="RNAither-package.html">RNAither</a></td>
+<td>Statistical analysis of high-throughput RNAi screens</td></tr>
+<tr><td width="25%"><a href="rnaither.html">rnaither</a></td>
+<td>Wrapper function for full automated analysis</td></tr>
+<tr><td width="25%"><a href="saveDataset.html">saveDataset</a></td>
+<td>Save the normalized dataset into a dataset text file</td></tr>
+<tr><td width="25%"><a href="saveOldIntensityColumns.html">saveOldIntensityColumns</a></td>
+<td>Save old intensity value columns</td></tr>
+<tr><td width="25%"><a href="savepValVec.html">savepValVec</a></td>
+<td>Save p-values to file</td></tr>
+<tr><td width="25%"><a href="scoredDataset1.html">scoredDataset1</a></td>
+<td>A dataset containing an additional column showing the p-values, after a median normalization and a t-test</td></tr>
+<tr><td width="25%"><a href="scoredDataset2.html">scoredDataset2</a></td>
+<td>A dataset containing an additional column showing the p-values after a Mann-Whitney test</td></tr>
+<tr><td width="25%"><a href="SNRQualControl.html">SNRQualControl</a></td>
+<td>Computing the SNR</td></tr>
+<tr><td width="25%"><a href="spatialDistrib.html">spatialDistrib</a></td>
+<td>Generate spatial plots of intensity values</td></tr>
+<tr><td width="25%"><a href="spatialDistribHits.html">spatialDistribHits</a></td>
+<td>Plotting the spatial distribution of the hits</td></tr>
+<tr><td width="25%"><a href="subtractBackground.html">subtractBackground</a></td>
+<td>Background substraction</td></tr>
+<tr><td width="25%"><a href="sumChannels.html">sumChannels</a></td>
+<td>Summarize channels</td></tr>
+<tr><td width="25%"><a href="summarizeReps.html">summarizeReps</a></td>
+<td>Generate a new dataset with summarized replicates</td></tr>
+<tr><td width="25%"><a href="summarizeRepsNoFiltering.html">summarizeRepsNoFiltering</a></td>
+<td>Generate a new dataset with summarized replicates</td></tr>
+<tr><td width="25%"><a href="trim.html">trim</a></td>
+<td>Compute the replicate mean with trimmed values</td></tr>
+<tr><td width="25%"><a href="Ttest.html">Ttest</a></td>
+<td>Perform a Student's t-test</td></tr>
+<tr><td width="25%"><a href="varAdjust.html">varAdjust</a></td>
+<td>Variance adjustment</td></tr>
+<tr><td width="25%"><a href="vennDiag.html">vennDiag</a></td>
+<td>Plotting a Venn Diagram to compare hits</td></tr>
+<tr><td width="25%"><a href="volcanoPlot.html">volcanoPlot</a></td>
+<td>Making a volcano plot</td></tr>
+<tr><td width="25%"><a href="ZPRIMEQualControl.html">ZPRIMEQualControl</a></td>
+<td>Computing the Z' factor</td></tr>
+<tr><td width="25%"><a href="ZScore.html">ZScore</a></td>
+<td>ZScore normalization</td></tr>
+<tr><td width="25%"><a href="ZScorePerScreen.html">ZScorePerScreen</a></td>
+<td>ZScore normalization per experiment</td></tr>
+<tr><td width="25%"><a href="ZScorePlot.html">ZScorePlot</a></td>
+<td>Plot normalized intensity values per well</td></tr>
+<tr><td width="25%"><a href="ZScorePlotTwo.html">ZScorePlotTwo</a></td>
+<td>Plot signal intensities per well (II)</td></tr>
+</table>
+</body></html>

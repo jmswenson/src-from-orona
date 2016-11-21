@@ -1,0 +1,16 @@
+# cd /Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/
+# source("file_name")      source("standard_error.txt")
+
+
+# Process control
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/xnp_control/processed/fitc/foci_summary.txt",header = TRUE);
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/xnp/processed/fitc/foci_summary.txt",header = TRUE);
+
+std.error(exp$Rdna);
+sink("standard_error_EXP.txt");
+
+cat("calculates the std.error for EXP");
+print(std.error(exp$Rdna));
+cat("calculates the std.error for EXP_control");
+print(std.error(cont$Rdna));
+sink();

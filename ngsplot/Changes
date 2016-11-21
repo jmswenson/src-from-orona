@@ -1,0 +1,169 @@
+Revision history for ngs.plot.
+==============================
+
+2.47 November 20, 2014
+    - Change default bam-pair colors to blue:yellow.
+    - Change bam-pair color from pair to tri.
+    - Add a parameter to control color distribution.
+    - Correct an error about "-N".
+    - Update plotCorrGram.r to fit the update of 'hclust'.
+    - Automatically determine if input is config or bam.
+
+2.41 June 9, 2014
+  Major changes:
+    - Add rank-based normalization as a preprocessing step in clustering.
+    - Add K-means clustering.
+    - Add support for strand-specific sequencing data.
+    - Add support for paired-end sequencing data.
+    - Enhance the speed of RNA-seq coverage calculation by two folds.
+    - Allow enhancers and DHSs as additional features in a genomic database.
+    - Add a script to generate corrgrams between samples.
+  Minor changes:
+    - Remove PCA as a clustering method.
+    - Fix some permission and program argument issues that can cause problems 
+      in galaxy installation.
+    - Fix a problem that custom bed files cannot be read in Galaxy.
+    - Explicitly create count files in current working directory, regardless 
+      of bam file locations.
+    - Galaxy portability fix: remove hardcoded path from 'system' call.
+    - Fix STAR aligner 255 quality score issue.
+    - Add a function to automatically infer quality score style when the short 
+      read aligner cannot be determined. 
+    - Fix an issue of exception caused by quote or comment symbol in bed file.
+    - Remove the "remove zero profiles" function (which only causes confusion).
+    - Fix single gene plotting error, i.e. deal with the boundary cases where
+      the heatmap data contains only single gene.
+    - Add support for custom Y-axis scale.
+    - Adjust margin size in a heatmap according to font size.
+    - Adjust heatmap heights according to the actual number of regions to plot.
+
+2.08 November 13, 2013
+    - Changed the pseudo-count calculation method in bam-pair. The new method 
+      seems to give much better results in our tests.
+    - Corrected a bug that causes wrong matches when using a subset gene list 
+      with genomes such as Yeast.
+
+2.07 September 20, 2013
+    - Specify individual bed file for each bam file in configuration.
+    - Custom colors in configuration file
+    - Allow fragment length to be modified for each bam file.
+    - Adjust line width in replot.
+    - Sanity check for bed file.
+    - Misc. minor bugs fixed.
+
+2.02 July 11, 2013
+    - Custom color scale for heatmap.
+    - Improved coverage calculation algorithm to make curves smoother.
+    - New bin-based approach to normalize coverage vectors(-AL bin).
+    - Options to turn on/off legend, figure box, axis labels and vertical 
+      lines.
+    - Option to change font size in replot.
+    - List chromosome names in ngsplotdb.py.
+    - Correct an error that the vertical line does not align X-axis ticks 
+      perfectly.
+    - Pattern match aligner programs.
+    - Minor changes to command line usage.
+    - Misc. minor bugs fixed.
+    - Moderate code refactoring.
+
+2.00.1 June 19, 2013
+    - This is a bug fix version. ngs.plot v2.00 will emit error if you want to 
+      use a BED file as genomic regions for plot. The bug has been fixed.
+
+2.00 June 18, 2013
+    - Massive addition of support for other genomes such as rn5, mm10 and dm3 
+      and other types of functional features like enhancers and dhs.
+    - We can now add support for any genome in UCSC or Ensembl within a short 
+      time.
+    - A python script - ngsplotdb.py is developed to list installed genomes, 
+      remove genomes or install new genomes.
+    - Ensemble is now the default database.
+    - Fixed a bug in plotting X-axis in avg. profiles introduced in v1.68.
+    - Allow mapping quality to be 0.
+
+1.68 May 8, 2013
+    - Output gene order as shown in heatmap. Each replot will also generate a 
+      new gene order.
+    - Allow users to change colors of heatmaps (replot).
+    - Added colorkey to heatmaps. You do not have to re-generate your plots, 
+      use replot.r. Also allow a user to adjust scale at global, region and 
+      local levels.
+    - Better sizing of figures and margins in heatmaps.
+    - Fixed a bug in X-axis plotting in heatmaps.
+    - Added a switch to integrate with Galaxy installation.
+
+1.67.1 Apr 26, 2013
+    - Important bug fix: the heatmap does not follow the order of given gene 
+      list even if "-GO none" is used. This has been fixed.
+    - New option "-RZ" to remove profiles that contain zero signal across all 
+      positions and all NGS samples.
+
+1.67 Apr 25, 2013
+    - Fixed a bug that may cause the program to exit when all mapping quality 
+      values are NAs.
+    - Automatically convert mapping scores of 255 if bam files are converted 
+      from BedTools.
+    - Fixed a bug that causes the program to exit when the flanking region 
+      exceeds chromosomal start position in RNA-seq plotting.
+    - Added gene information to hmX.txt files.
+    - Misc. tiny bugs fixed.
+
+1.66.2 Apr 4, 2013
+    - Fixed a bug that can cause RNA-seq plotting to exit with an error 
+      message stating widths(x) cannot be negative.
+
+1.66.1 Apr 3, 2013
+    - Fixed a bug that prevents replot from reading files correctly if the 
+      original output name contains directory name.
+
+1.66  Mar 26, 2013
+    - Added a function to accept bam file pairs.
+    - Automatically determine interval vs. flanking size in plot.
+    - Fixed a bug in RNA-seq coverage calculation (Thanks to Alphonse Chu from 
+      Ottawa to point out).
+    - Minor bugs fixed.
+
+1.65.1 Mar 18, 2013
+    - Fixed a bug that emits errors when using a custom bed file (Thanks to 
+      Timothy E. Reddy from Duke to point out).
+
+1.65  Mar 12, 2013
+    - This is an emergent bug fix version which addresses some problems when 
+      reading bam header information.
+    - If alignment algorithm cannot be determined, ngs.plot will try to 
+      automatically convert mapping scores of 255 to sth. meaningful.
+    - Uses a better way to read sequence names in a bam file.
+    - Buffer size is automatically set based on fragment length.
+
+1.64  Mar 7, 2013
+    - Significant improvement to coverage calculation. The program now 
+      calculate coverage based on needs by extracting bam files on the go. 
+      This has significantly reduced memory requirement.
+    - cov.calc.r has been removed from the package. There is no need to pre-
+      calculate coverage any more.
+    - replot.r now supports heatmap and a few other options to tune figures.
+    - The result files are now wrapped as a zip file for cleaness.
+
+1.34  Feb 23, 2013
+    - A lot of code re-writing to optimize performance and to modularize the 
+      project.
+    - More usage of parallel processing.
+    - Added new heatmap function.
+    - Implemented 6 algorithms to order genes in heatmaps.
+    - Added column subset function in replot.r.
+    - Used robust statistics as default for avg. profile plot.
+    - Reconstruction of the gene database and speedup annotation loading by ~6 
+      folds.
+
+1.05  Dec 3, 2012
+    - Fix bugs in calculating physical coverage 
+    - Fix bugs in the scripts that are used to extract exons from Cufflinks.
+
+1.04  Nov 12, 2012 
+    - Automatic turning off SEM when there is only single gene given in gene 
+      list.
+    - Misc. re-organization of ngs.plot.r code.
+    - Some re-organization of distribution folder.
+    - Added example gene list; example data for user to run through.
+    - Added script "alt_reg_cufflinks" which extracts all alternative regions 
+      in one command.

@@ -1,0 +1,234 @@
+CytoscapeConnection     CytoscapeConnection
+CytoscapeConnectionClass-class
+                        Class "CytoscapeConnectionClass"
+CytoscapeWindow         CytoscapeWindow
+CytoscapeWindowClass-class
+                        Class "CytoscapeWindowClass"
+addCyEdge               addCyEdge
+addCyNode               addCyNode
+addGraphToGraph         addGraphToGraph
+clearMsg                clearMsg
+clearSelection          clearSelection
+copyVisualStyle         copyVisualStyle
+createWindow            createWindow
+createWindowFromSelection
+                        createWindowFromSelection
+cy2.edge.names          cy2.edge.names
+deleteAllWindows        deleteAllWindows
+deleteEdgeAttribute     deleteEdgeAttribute
+deleteNodeAttribute     deleteNodeAttribute
+deleteSelectedEdges     deleteSelectedEdges
+deleteSelectedNodes     deleteSelectedNodes
+deleteWindow            deleteWindow
+demoSimpleGraph         demoSimpleGraph
+displayGraph            displayGraph
+dockPanel               dockPanel
+eda                     eda
+eda.names               eda.names
+existing.CytoscapeWindow
+                        existing.CytoscapeWindow
+fitContent              fitContent
+fitSelectedContent      fitSelectedContent
+floatPanel              floatPanel
+getAdjacentEdgeNames    getAdjacentEdgeNames
+getAllEdgeAttributes    getAllEdgeAttributes
+getAllEdges             getAllEdges
+getAllNodeAttributes    getAllNodeAttributes
+getAllNodes             getAllNodes
+getArrowShapes          getArrowShapes
+getAttributeClassNames
+                        getAttributeClassNames
+getCenter               getCenter
+getDefaultBackgroundColor
+                        getDefaultBackgroundColor
+getDefaultEdgeReverseSelectionColor
+                        getDefaultEdgeReverseSelectionColor
+getDefaultEdgeSelectionColor
+                        getDefaultEdgeSelectionColor
+getDefaultNodeReverseSelectionColor
+                        getDefaultNodeReverseSelectionColor
+getDefaultNodeSelectionColor
+                        getDefaultNodeSelectionColor
+getDirectlyModifiableVisualProperties
+                        getDirectlyModifiableVisualProperties
+getEdgeAttribute        getEdgeAttribute
+getEdgeAttributeNames   getEdgeAttributeNames
+getEdgeCount            getEdgeCount
+getFirstNeighbors       getFirstNeighbors
+getGraph                getGraph
+getGraphFromCyWindow    getGraphFromCyWindow
+getLayoutNameMapping    getLayoutNameMapping
+getLayoutNames          getLayoutNames
+getLayoutPropertyNames
+                        getLayoutPropertyNames
+getLayoutPropertyType   getLayoutPropertyType
+getLayoutPropertyValue
+                        getLayoutPropertyValue
+getLineStyles           getLineStyles
+getNodeAttribute        getNodeAttribute
+getNodeAttributeNames   getNodeAttributeNames
+getNodeCount            getNodeCount
+getNodePosition         getNodePosition
+getNodeShapes           getNodeShapes
+getNodeSize             getNodeSize
+getSelectedEdgeCount    getSelectedEdgeCount
+getSelectedEdges        getSelectedEdges
+getSelectedNodeCount    getSelectedNodeCount
+getSelectedNodes        getSelectedNodes
+getViewCoordinates      getViewCoordinates
+getVisualStyleNames     getVisualStyleNames
+getWindowCount          getWindowCount
+getWindowID             getWindowID
+getWindowList           getWindowList
+getZoom                 getZoom
+hideAllPanels           hideAllPanels
+hideNodes               hideNodes
+hidePanel               hidePanel
+hideSelectedEdges       hideSelectedEdges
+hideSelectedNodes       hideSelectedNodes
+initEdgeAttribute       initEdgeAttribute
+initNodeAttribute       initNodeAttribute
+invertEdgeSelection     invertEdgeSelection
+invertNodeSelection     invertNodeSelection
+layoutNetwork           layoutNetwork
+lockNodeDimensions      lockNodeDimensions
+makeRandomGraph         makeRandomGraph
+makeSimpleGraph         makeSimpleGraph
+msg                     msg
+new.CytoscapeWindow     new.CytoscapeWindow
+noa                     noa
+noa.names               noa.names
+ping                    ping
+pluginVersion           pluginVersion
+raiseWindow             raiseWindow
+redraw                  redraw
+restoreLayout           restoreLayout
+saveImage               saveImage
+saveLayout              saveLayout
+saveNetwork             saveNetwork
+selectEdges             selectEdges
+selectFirstNeighborsOfSelectedNodes
+                        selectFirstNeighborsOfSelectedNodes
+selectNodes             selectNodes
+sendEdges               sendEdges
+sendNodes               sendNodes
+setCenter               setCenter
+setDefaultBackgroundColor
+                        setDefaultBackgroundColor
+setDefaultEdgeColor     setDefaultEdgeColor
+setDefaultEdgeFontSize
+                        setDefaultEdgeFontSize
+setDefaultEdgeLineWidth
+                        setDefaultEdgeLineWidth
+setDefaultEdgeReverseSelectionColor
+                        setDefaultEdgeReverseSelectionColor
+setDefaultEdgeSelectionColor
+                        setDefaultEdgeSelectionColor
+setDefaultNodeBorderColor
+                        setDefaultNodeBorderColor
+setDefaultNodeBorderWidth
+                        setDefaultNodeBorderWidth
+setDefaultNodeColor     setDefaultNodeColor
+setDefaultNodeFontSize
+                        setDefaultNodeFontSize
+setDefaultNodeLabelColor
+                        setDefaultNodeLabelColor
+setDefaultNodeReverseSelectionColor
+                        setDefaultNodeReverseSelectionColor
+setDefaultNodeSelectionColor
+                        setDefaultNodeSelectionColor
+setDefaultNodeShape     setDefaultNodeShape
+setDefaultNodeSize      setDefaultNodeSize
+setEdgeAttributes       setEdgeAttributes
+setEdgeAttributesDirect
+                        setEdgeAttributesDirect
+setEdgeColorDirect      setEdgeColorDirect
+setEdgeColorRule        setEdgeColorRule
+setEdgeFontSizeDirect   setEdgeFontSizeDirect
+setEdgeLabelColorDirect
+                        setEdgeLabelColorDirect
+setEdgeLabelDirect      setEdgeLabelDirect
+setEdgeLabelOpacityDirect
+                        setEdgeLabelOpacityDirect
+setEdgeLabelRule        setEdgeLabelRule
+setEdgeLabelWidthDirect
+                        setEdgeLabelWidthDirect
+setEdgeLineStyleDirect
+                        setEdgeLineStyleDirect
+setEdgeLineStyleRule    specify the line styles to be used in drawing
+                        edges
+setEdgeLineWidthDirect
+                        setEdgeLineWidthDirect
+setEdgeLineWidthRule    setEdgeLineWidthRule
+setEdgeOpacityDirect    setEdgeOpacityDirect
+setEdgeSourceArrowColorDirect
+                        setEdgeSourceArrowColorDirect
+setEdgeSourceArrowColorRule
+                        Specify Rule for the Source Arrow Color
+setEdgeSourceArrowOpacityDirect
+                        setEdgeSourceArrowOpacityDirect
+setEdgeSourceArrowRule
+                        specify the arrow types to be used at the end
+                        of an edge, at the 'source' node
+setEdgeSourceArrowShapeDirect
+                        setEdgeSourceArrowShapeDirect
+setEdgeTargetArrowColorDirect
+                        setEdgeTargetArrowColorDirect
+setEdgeTargetArrowColorRule
+                        Specify Rule for the Target Arrow Color
+setEdgeTargetArrowOpacityDirect
+                        setEdgeTargetArrowOpacityDirect
+setEdgeTargetArrowRule
+                        specify the arrow types to be used at the end
+                        of an edge, at the 'target' node
+setEdgeTargetArrowShapeDirect
+                        setEdgeTargetArrowShapeDirect
+setEdgeTooltipDirect    setEdgeTooltipDirect
+setEdgeTooltipRule      setEdgeTooltipRule
+setGraph                setGraph
+setLayoutProperties     setLayoutProperties
+setNodeAttributes       setNodeAttributes
+setNodeAttributesDirect
+                        setNodeAttributesDirect
+setNodeBorderColorDirect
+                        setNodeBorderColorDirect
+setNodeBorderColorRule
+                        setNodeBorderColorRule
+setNodeBorderOpacityDirect
+                        setNodeBorderOpacityDirect
+setNodeBorderWidthDirect
+                        setNodeBorderWidthDirect
+setNodeBorderWidthRule
+                        setNodeBorderWidthRule
+setNodeColorDirect      setNodeColorDirect
+setNodeColorRule        setNodeColorRule
+setNodeFillOpacityDirect
+                        setNodeFillOpacityDirect
+setNodeFontSizeDirect   setNodeFontSizeDirect
+setNodeHeightDirect     setNodeHeightDirect
+setNodeImageDirect      setNodeImageDirect
+setNodeLabelColorDirect
+                        setNodeLabelColorDirect
+setNodeLabelDirect      setNodeLabelDirect
+setNodeLabelOpacityDirect
+                        setNodeLabelOpacityDirect
+setNodeLabelRule        setNodeLabelRule
+setNodeOpacityDirect    setNodeOpacityDirect
+setNodeOpacityRule      setNodeOpacityRule
+setNodePosition         setNodePosition
+setNodeShapeDirect      setNodeShapeDirect
+setNodeShapeRule        setNodeShapeRule
+setNodeSizeDirect       setNodeSizeDirect
+setNodeSizeRule         setNodeSizeRule
+setNodeTooltipRule      setNodeTooltipRule
+setNodeWidthDirect      setNodeWidthDirect
+setTooltipDismissDelay
+                        setTooltipDismissDelay
+setTooltipInitialDelay
+                        setTooltipInitialDelay
+setVisualStyle          setVisualStyle
+setWindowSize           setWindowSize
+setZoom                 setZoom
+showGraphicsDetails     showGraphicsDetails
+unhideAll               unhideAll
+validCyWin              validCyWin

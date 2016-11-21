@@ -1,0 +1,186 @@
+# cd /Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/
+# source("stats_sylvain_absolute_number.txt")
+# Set threshold for group
+
+#########  thr <- 2.000
+
+thr <- 2.000;
+
+# Process control
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(cont$Rdna,by=list(cont$NucID,cont$Filename),FUN=mean)
+pos_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>2.000));
+
+for (i in 1:length(aggRdna$Group.1))
+total_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>0));
+
+Perc_pos_Rdna_cont = pos_RdnaC; # number of foci above 2.000 per nucleus
+Perc_pos_Rdna_cont_f = pos_RdnaC/total_RdnaC;
+
+# Process experiment
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(exp$Rdna,by=list(exp$NucID,exp$Filename),FUN=mean)
+pos_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_Rdna[i] <- sum((exp$NucID==aggRdna$Group.1[i])&(exp$Filename==aggRdna$Group.2[i])&(exp$Rdna>2.000));
+
+for (i in 1:length(aggRdna$Group.1))
+total_Rdna[i] <- sum((exp$NucID==aggRdna$Group.1[i])&(exp$Filename==aggRdna$Group.2[i])&(exp$Rdna>0));
+
+Perc_pos_Rdna_exp = pos_Rdna; # gives number of foci in a nucleus above a given Rdna value which is defined by 2.000
+Perc_pos_Rdna_exp_f = pos_Rdna/total_Rdna; # gives fraction of foci in a nucleus above a given Rdna value which is defined by 2.000
+
+
+
+
+postscript("HP2_above_2.000_boxplot.ps"); #turns postscript on to save file to location in ""
+boxplot(Perc_pos_Rdna_exp, Perc_pos_Rdna_cont, ylab= "number of foci per nucleus where Rdna > 2.000", xlab="Left is HP2, right is control"); #makes boxplot
+dev.off(); #turns postscript off
+
+postscript("HP2_above_2.000_qqplot.ps"); #turns postscript on to save file to location in ""
+qqplot(Perc_pos_Rdna_exp, Perc_pos_Rdna_cont, main ="number of foci per nucleus where Rdna > 2.000"); #makes qqplot
+dev.off(); #turns postscript off
+
+
+postscript("HP2_above_2.000_boxplot_fraction.ps"); #turns postscript on to save file to location in ""
+boxplot(Perc_pos_Rdna_exp_f, Perc_pos_Rdna_cont_f, ylab= "fraction of foci per nucleus where Rdna > 2.000", xlab="Left is HP2, right is control"); #makes boxplot
+dev.off(); #turns postscript off
+
+postscript("HP2_above_2.000_qqplot_fraction.ps"); #turns postscript on to save file to location in ""
+qqplot(Perc_pos_Rdna_exp_f, Perc_pos_Rdna_cont_f, main ="fraction of foci per nucleus where Rdna > 2.000"); #makes qqplot
+dev.off(); #turns postscript off
+
+
+
+
+exp_above_2.000 <- Perc_pos_Rdna_exp;
+cntrl_above_2.000 <- Perc_pos_Rdna_cont;
+
+
+# performs above analysis for values less than or equal to the threshold
+# Process control
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(cont$Rdna,by=list(cont$NucID,cont$Filename),FUN=mean)
+pos_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna<=2.000));
+
+for (i in 1:length(aggRdna$Group.1))
+total_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>0));
+
+Perc_pos_Rdna_cont = pos_RdnaC;
+Perc_pos_Rdna_cont_f = pos_RdnaC/total_RdnaC;
+
+
+# Process experiment
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(exp$Rdna,by=list(exp$NucID,exp$Filename),FUN=mean)
+pos_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_Rdna[i] <- sum((exp$NucID==aggRdna$Group.1[i])&(exp$Filename==aggRdna$Group.2[i])&(exp$Rdna<=2.000));
+
+for (i in 1:length(aggRdna$Group.1))
+total_Rdna[i] <- sum((exp$NucID==aggRdna$Group.1[i])&(exp$Filename==aggRdna$Group.2[i])&(exp$Rdna>0));
+
+Perc_pos_Rdna_exp = pos_Rdna; #gives fraction of foci in a nucleus above a given Rdna value which is defined by thr
+Perc_pos_Rdna_exp_f = pos_Rdna/total_Rdna;
+
+postscript("HP2_at_or_below_2.000_boxplot<=.ps"); #turns postscript on to save file to location in ""
+boxplot(Perc_pos_Rdna_exp, Perc_pos_Rdna_cont, ylab= "number of foci per nucleus where Rdna < or = 2.000", xlab="Left is HP2, right is control"); #makes boxplot
+dev.off(); #turns postscript off
+
+postscript("HP2_at_or_below_2.000_qqplot<=.ps"); #turns postscript on to save file to location in ""
+qqplot(Perc_pos_Rdna_cont, Perc_pos_Rdna_exp, main="number of foci per nucleus where Rdna < or = 2.000"); #makes qqplot
+dev.off(); #turns postscript off
+
+postscript("HP2_at_or_below_2.000_boxplot_fraction.ps"); #turns postscript on to save file to location in ""
+boxplot(Perc_pos_Rdna_exp_f, Perc_pos_Rdna_cont_f, ylab= "fraction of foci per nucleus where Rdna < or = 2.000", xlab="Left is HP2, right is control"); #makes boxplot
+dev.off(); #turns postscript off
+
+postscript("HP2_at_or_below_2.000_qqplot_fraction.ps"); #turns postscript on to save file to location in ""
+qqplot(Perc_pos_Rdna_exp_f, Perc_pos_Rdna_cont_f, main="fraction of foci per nucleus where Rdna < or = 2.000"); #makes qqplot
+dev.off(); #turns postscript off
+
+
+# Calculation of stats above and below thr
+
+sink("stat_tests_above_and_less_or_equal_to_2.000_output.txt");
+ 
+contRdna_above_2.000 <- cont$Rdna[(cont$Rdna>2.000)]; # Extracts values above 2.000 and puts it in contRdna_above_2.000
+expRdna_above_2.000 <- exp$Rdna[(exp$Rdna>2.000)];
+print(shapiro.test(expRdna_above_2.000));
+print(shapiro.test(contRdna_above_2.000));
+print(t.test(contRdna_above_2.000,expRdna_above_2.000));
+print(wilcox.test(contRdna_above_2.000,expRdna_above_2.000));
+
+contRdna_at_or_below_2.000 <- cont$Rdna[(cont$Rdna<=2.000)];
+expRdna_at_or_below_2.000 <- exp$Rdna[(exp$Rdna<=2.000)];
+print(shapiro.test(expRdna_at_or_below_2.000));
+print(shapiro.test(contRdna_at_or_below_2.000));
+print(t.test(contRdna_at_or_below_2.000,expRdna_at_or_below_2.000));
+print(wilcox.test(contRdna_at_or_below_2.000,expRdna_at_or_below_2.000));
+
+sink();
+
+postscript("HP2_Rdna_above_2.000_thr_boxplot_z.ps");
+boxplot(expRdna_above_2.000,contRdna_above_2.000, ylab= "average Rdna per nucleus where Rdna is > 2.000", xlab="Left is HP2, right is control");
+dev.off();
+
+postscript("HP2_Rdna_at_or_below_2.000_thr_boxplot_z.ps");
+boxplot(expRdna_at_or_below_2.000,contRdna_at_or_below_2.000, ylab= "average Rdna per nucleus where Rdna is < or = 2.000", xlab="Left is HP2, right is control");
+dev.off();
+
+
+
+
+##########names
+
+exp_col<-rgb(1,0,0,.75); #assigns color and alpha value to exp data points
+cont_col<-rgb(0,0,1,.5);
+
+tiff(file="Histogram_of_HP2_and_GFP_control_above_2.000.tiff");
+hist(expRdna_above_2.000, breaks=100, col=exp_col, main="Histogram of HP2 and GFP control Rdna values above 2.000");
+hist(contRdna_above_2.000, breaks=100, col=cont_col, add=TRUE);
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff(file="Histogram_of_HP2_above_2.000.tiff")
+hist(expRdna_above_2.000, breaks=100, col=exp_col, main="Histogram of HP2 values above 2.000");
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff("Histogram_of_HP2_control_above_2.000.tiff")
+hist(contRdna_above_2.000, breaks=100, col=cont_col, main="Histogram of HP2_control values above 2.000");
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+
+
+
+tiff(file="Histogram_of_HP2_and_GFP_control_at_or_below_2.000.tiff");
+hist(expRdna_at_or_below_2.000, breaks=100, col=exp_col, main="Histogram of HP2 and GFP control Rdna values at_or_below 2.000");
+hist(contRdna_at_or_below_2.000, breaks=100, col=cont_col, add=TRUE);
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff(file="Histogram_of_HP2_at_or_below_2.000.tiff")
+hist(expRdna_at_or_below_2.000, breaks=100, col=exp_col, main="Histogram of HP2 values at_or_below 2.000");
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff("Histogram_of_HP2_control_at_or_below_2.000.tiff")
+hist(contRdna_at_or_below_2.000, breaks=100, col=cont_col, main="Histogram of HP2_control values at_or_below 2.000");
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+

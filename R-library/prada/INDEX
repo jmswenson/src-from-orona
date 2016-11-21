@@ -1,0 +1,43 @@
+analysePlate            Apply a statistic to the data from each well in
+                        a plate
+as.all                  Coercion without introduction of NAs
+barploterrbar           Barplot with error bars.
+cframe                  A sample cytoFrame object - German Cancer
+                        Research Center Heidelberg -
+combineFrames           Combine the cytoFrames within a cytoSet
+                        according to some grouping factor
+csApply                 Apply a function over the intensities in a
+                        cytoSet
+cset                    A sample cytoSet object - German Cancer
+                        Research Center Heidelberg -
+cytoFrame-class         'cytoFrame': a class for storing observed
+                        quantitative properties from a population of
+                        cells, most likely from a FACS run or,
+                        alternatively, from automated microscopy
+cytoSet-class           'cytoSet': a class for storing raw data from a
+                        quantitative cell-based assay
+devDims                 Device Dimensions for plate plots
+devRes                  Resolution of current plotting device
+fitNorm2                Fit bivariate normal distribution.
+gate-class              'gate': a class for subsetting flow-cytometry
+                        data by defining regions in two-dimesional
+                        projections of the data
+gateSet-class           'gateSet': a class for subsetting
+                        flow-cytometry data by defining multiple
+                        regions in two-dimesional projections of the
+                        data
+getPradaPar             Set and query global parameters for functions
+                        in the prada package
+plotNorm2               Plot fitted bivariate normal distribution.
+plotPlate               Plot a well statistic for microtiter plates.
+progress                A simple tcltk progress window
+readCytoSet             Create a cytoSet object from one or more FCS
+                        3.0 files
+readFCS                 Read an FCS file
+readFCSdata             Auxiliary functions for readFCS
+removeCensored          Remove rows that contain censored data
+threePanelPlot          Visualize cytometry data
+thresholds              Discretize a two-dimensional data space into
+                        quadrants by applying thresholds
+touchFCS                Check for FCS files
+vpLocation              Absolute location of current viewport

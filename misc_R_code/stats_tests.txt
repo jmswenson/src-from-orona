@@ -1,0 +1,43 @@
+# source("stats_tests.txt")
+# gives the number of nuclei count, sd and mean of $Rdna, performs shapiro normality, t.test and wilcox.test on exp$Rdna vs. cont$Rdna
+
+sink("test");
+
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/nuc_summary.txt",header = TRUE);
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/nuc_summary.txt",header = TRUE);
+
+nrow(exp); # Gives number of nuclei counted in the exp
+nrow(cont); # Gives number of nuclei counted in the cont
+sd_exp <- sd(exp$Rdna);
+mean_exp <- mean(exp$Rdna);
+sd_cont <- sd(cont$Rdna);
+mean_cont <- mean(cont$Rdna);
+shapiro.test(exp$Rdna); # performs normality test on experimental data.  if p-value is above .05 than it is not normal
+shapiro.test(cont$Rdna);
+t.test(exp$Rdna,cont$Rdna); # use if data is normal
+wilcox.test(exp$Rdna,cont$Rdna); # use if data is not normal
+
+cat("nuclei counted in the exp");
+print(nrow(exp));
+cat("nuclei counted in the cont");
+print(nrow(cont));
+cat("sd_exp");
+print(sd_exp);
+cat("sd_cont");
+print(sd_cont);
+cat("mean_exp");
+print(mean_exp);
+cat("mean_cont");
+print(mean_cont);
+print(shapiro.test(exp$Rdna));
+print(shapiro.test(cont$Rdna));
+print(t.test(exp$Rdna,cont$Rdna));
+print(wilcox.test(exp$Rdna,cont$Rdna));
+
+
+sink();
+
+# shapiro.test(exp$Rgrad);
+# shapiro.test(cont$Rgrad);
+# t.test(exp$Rgrad,cont$Rgrad);
+# wilcox.test(exp$Rgrad,cont$Rgrad);

@@ -1,0 +1,18 @@
+# script based on one from Sasha to read in multiple files
+
+
+postscript("modencode.ps", width = 8, pointsize=10);
+colors_set<-c('blue', 'skyblue1', 'green', 'yellow', 'orange', 'red');
+a<-list.files(path="/Users/sasha/modencode", pattern="NEW*");
+for (x in a) {
+data<-read.table(x, header=TRUE);
+title=x;
+cols=ncol(data);
+plot(data[c(1,2)], main=title, xlab="Distance from TSS (bp)", ylab="NLR", pch = "");
+for(i in 2:(cols)){
+lines((lowess(data[c(1,i)], f = 1/10)), type = "l", col=colors_set[i-1], lwd=3);
+}
+legend("topright",names(data[2:cols]), pch=c(45,45), lwd=3, col=colors_set, xjust=1, yjust=0.5)
+};
+dev.off();
+

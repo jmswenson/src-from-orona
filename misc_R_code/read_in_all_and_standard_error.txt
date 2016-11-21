@@ -1,0 +1,43 @@
+# cd /Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/
+# source("file_name")      source("read_in_all.txt")
+
+
+# Process control
+xnp_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/xnp_control/processed/fitc/foci_summary.txt",header = TRUE);
+xnp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/xnp/processed/fitc/foci_summary.txt",header = TRUE);
+suvar3_9_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/suvar3_9_control/processed/fitc/foci_summary.txt",header = TRUE);
+suvar3_9 <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/suvar3_9/processed/fitc/foci_summary.txt",header = TRUE);
+spt16_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/spt16_control/processed/fitc/foci_summary.txt",header = TRUE);
+spt16 <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/spt16/processed/fitc/foci_summary.txt",header = TRUE);
+PIAS_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/PIAS_control/processed/fitc/foci_summary.txt",header = TRUE);
+PIAS <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/PIAS/processed/fitc/foci_summary.txt",header = TRUE);
+nipB_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/nipB_control/processed/fitc/foci_summary.txt",header = TRUE);
+nipB <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/nipB/processed/fitc/foci_summary.txt",header = TRUE);
+jmjd2a_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/jmjd2a_control/processed/fitc/foci_summary.txt",header = TRUE);
+jmjd2a <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/jmjd2a/processed/fitc/foci_summary.txt",header = TRUE);
+jil1_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/jil1_control/processed/fitc/foci_summary.txt",header = TRUE);
+jil1 <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/jil1/processed/fitc/foci_summary.txt",header = TRUE);
+HP2_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/foci_summary.txt",header = TRUE);
+HP2 <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/foci_summary.txt",header = TRUE);
+hp1c_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/hp1c_control/processed/fitc/foci_summary.txt",header = TRUE);
+hp1c <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/hp1c/processed/fitc/foci_summary.txt",header = TRUE);
+HP1a_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/hp1a_control/processed/fitc/foci_summary.txt",header = TRUE);
+HP1a <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/hp1a/processed/fitc/foci_summary.txt",header = TRUE);
+brama_control <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/brama_control/processed/fitc/foci_summary.txt",header = TRUE);
+brama <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/brama/processed/fitc/foci_summary.txt",header = TRUE);
+
+
+# sum((suvar3_9$Rdna,suvar3_9_control$Rdna,xnp_control$Rdna,xnp$Rdna,spt16_control$Rdna,spt16$Rdna,PIAS_control$Rdna,PIAS$Rdna,nipB_control$Rdna,nipB$Rdna,jmjd2a_control$Rdna,jmjd2a$Rdna,jil1_control$Rdna,jil1$Rdna,HP2_control$Rdna,HP2$Rdna,hp1c_control$Rdna,hp1c$Rdna,HP1a_cotnrol$Rdna,HP1a$Rdna,brama_control$Rdna,brama$Rdna))/sum(nrow(suvar3_9),nrow(suvar3_9_control),nrow(xnp_control),nrow(xnp),nrow(spt16_control),nrow(spt16),nrow(PIAS_control),nrow(PIAS),nrow(nipB_control),nrow(nipB),nrow(jmjd2a_control),nrow(jmjd2a),nrow(jil1_control),nrow(jil1),nrow(HP2_control),nrow(HP2),nrow(hp1c_control),nrow(hp1c),nrow(HP1a_cotnrol),nrow(HP1a),nrow(brama_control),nrow(brama)); # sums all Rdna values and divides by total number of Rdna values     calculates the average over all experiments and controls   NOT SUMMED PROPERLY.....SEE EXAMPLES BELOW
+
+ave_all_exp <- sum(sum(suvar3_9$Rdna),sum(xnp$Rdna),sum(spt16$Rdna),sum(PIAS$Rdna),sum(nipB$Rdna),sum(jmjd2a$Rdna),sum(jil1$Rdna),sum(HP2$Rdna),sum(hp1c$Rdna),sum(HP1a$Rdna),sum(brama$Rdna))/sum(nrow(suvar3_9),nrow(xnp),nrow(spt16),nrow(PIAS),nrow(nipB),nrow(jmjd2a),nrow(jil1),nrow(HP2),nrow(hp1c),nrow(HP1a),nrow(brama)); # sums all exp Rdna values and divides by total exp number of Rdna values     calculates the average over all experiments
+
+ave_all_cont <- sum(sum(suvar3_9_control$Rdna),sum(xnp_control$Rdna),sum(spt16_control$Rdna),sum(PIAS_control$Rdna),sum(nipB_control$Rdna),sum(jmjd2a_control$Rdna),sum(jil1_control$Rdna),sum(HP2_control$Rdna),sum(hp1c_control$Rdna),sum(HP1a_control$Rdna),sum(brama_control$Rdna))/sum(nrow(suvar3_9_control),nrow(xnp_control),nrow(spt16_control),nrow(PIAS_control),nrow(nipB_control),nrow(jmjd2a_control),nrow(jil1_control),nrow(HP2_control),nrow(hp1c_control),nrow(HP1a_control),nrow(brama_control)); # sums all control Rdna values and divides by total control number of Rdna values     calculates the average over all controls
+
+sink("average_of_all_exps");
+
+cat("calculates the average over all experiments");
+print(ave_all_exp);
+cat("calculates the average over all controls");
+print(ave_all_cont);
+
+sink();

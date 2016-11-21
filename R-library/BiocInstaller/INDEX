@@ -1,0 +1,8 @@
+biocLite                Install or update Bioconductor and CRAN
+                        packages
+biocases_group          Convenience functions to return package names
+                        associated with Bioconductor publications.
+biocinstallRepos        Display current Bioconductor and CRAN
+                        repositories.
+useDevel                Get the 'devel' version of the BiocInstaller
+                        package.

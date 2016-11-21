@@ -1,0 +1,5 @@
+find \r\t
+replace\r\t\t
+
+\r=new line
+\t=tab

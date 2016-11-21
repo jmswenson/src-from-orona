@@ -1,0 +1,88 @@
+Bscore                  B score normalization
+Data                    Access and replace the assayData slot of a
+                        cellHTS object
+KcViab                  A sample cellHTS object - D. melanogaster
+                        genome-wide RNAi screen
+KcViabSmall             A sample cellHTS object - D. melanogaster
+                        genome-wide RNAi screen
+ROC                     Creates an object of class "ROC" which can be
+                        plotted as a ROC curve
+ROC-class               Class that contain data that can be plotted as
+                        a ROC curve.
+annotate                Annotates the reagents (probes) of a cellHTS
+                        object
+batch                   Access and replace the batch information of a
+                        cellHTS object
+bdgpbiomart             Dataset with annotation of CG identifiers
+buildCellHTS2           Build a cellHTS2 object from a data frame
+                        containing measurements
+cellHTS-class           A class for data from cell-based
+                        high-throughput assays performed in plate
+                        format.
+cellHTS2                cellHTS2 Package Overview
+configurationAsScreenPlot
+                        Screen plot of the plate configuration of a
+                        cellHTS object
+configure               Configures the plates and plate result files
+convertOldCellHTS       Convert an old S3 class cellHTS object to the
+                        new S4 class cellHTS object
+convertWellCoordinates
+                        Converts different well identifiers
+dualCh                  A sample cellHTS object containing dual channel
+                        data
+getAlphaNumeric         Convert from plate coordinates to alphanumeric
+                        notation.
+getDynamicRange         Per-plate dynamic range of a cellHTS object
+getEnVisionRawData      Read a plate file obtain from EnVision Plate
+                        Reader
+getMeasureRepAgreement
+                        Measures of agreement between plate replicates
+                        from a cellHTS object
+getTopTable             Generate the hit list from a scored cellHTS
+                        object
+getZfactor              Per-experiment Z'-factor of a cellHTS object
+gseaModule              Constructor for an object of class gseaModule
+imageScreen             Experiment-wide quality control plot of a
+                        cellHTS object
+intensityFiles          Retrieve the contents of the input files used
+                        to generate a given cellHTS object.
+normalizePlates         Per-plate data transformation, normalization
+                        and variance adjustment
+oldKcViabSmall          A sample S3 class cellHTS object - D.
+                        melanogaster genome-wide RNAi screen
+oneRowPerId             Rearrange dataframe entries such that there is
+                        exactly one row per ID.
+plate                   Retrieve information related with the format of
+                        a RNAi experiment
+plateEffects            Access plate effects stored in a cellHTS
+                        object.
+plotSpatialEffects      Plate plot with the row and column offsets
+                        estimated by the a spatial normalization method
+readHTAnalystData       Read a set of plate results obtained from a
+                        HTanalyser plate reader
+readPlateList           Read a collection of plate reader data files
+rsa                     Perform RSA ranking on the screening results.
+scoreReplicates         Scores normalized replicate values given in a
+                        cellHTS object
+scores2calls            Sigmoidal transformation of the score values
+                        stored in a cellHTS object obtaining the call
+                        values for each probe.
+settings                cellHTS2 HTML report settings
+spatialNormalization    Spatial normalization
+state                   Retrieve the state of a cellHTS object.
+summarizeChannels       Summarization of dual-channel data
+summarizeReplicates     Summarize between scored replicate values given
+                        in a cellHTS object to obtain a single value
+                        for each probe
+templateDescriptionFile
+                        Creates a template description file for an RNAi
+                        experiment
+updateCellHTS           Update old serialized cellHTS objects.
+wellAnno                Access the annotation from a cellHTS object.
+write.tabdel            Wrapper to function 'write.table' used to write
+                        data to a tab-delimited file
+writeReport             Create a directory with HTML pages of linked
+                        tables and plots documenting the contents of a
+                        cellHTS experiment
+writeTab                Write the data from a cellHTS object to a
+                        tab-delimited file

@@ -1,0 +1,271 @@
+
+R version 2.9.2 (2009-08-24)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # R code to analyze 10_25_09 program from Sylvain
+> # source ("/Users/joel/Desktop/new_sylvain_my_R_analysis/R_loops_trimmed_nuc.R")
+> 
+> # pattern_find<-c("nuc_summary_","foci_summary_")
+> # for (pat in 1:2) {
+> # 	if pat == 1 pattern_find_v<-pattern_find[pat]
+> 
+> ############# NEED TO BE HERE:  /Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt
+> 
+> 
+> 	library(gclus);
+> 	library(plotrix);
+> 
+> a<-list.files(path="/Users/joel/Program_with_sylvain/Joel_v7_1/all_nuc_sum_txt",pattern="nuc_summary_",recursive=TRUE);
+> for (x in a)
++ 	{data<-read.table(x, header=TRUE);
++ 	title=x;
++ 
++ data$image <- NULL;
++ 
++ # Code to get appropriate labels for graphs and filenames
++ xx<-strsplit(x,"nuc_summary_"); # splits string (x) after "nuc_summary_"      NOTE: .is any character and * is as many of the previous item...see help(grep) or help(regexp)
++ xx<-xx[[1]][2];
++ xxa<-strsplit(xx, ".txt");
++ xxr<-xxa[[1]][1]; # takes second item that was split and puts it in a new vector
++ m<-paste("TRIMMED_Scatterplot_of_Nucleus_Summary_for",xxr,".ps", sep="-");
++ n<-paste("Scatterplot Matrix of TRIMMED Nucleus Summary for",xxr);
++ csv<-paste("TRIMMED_average_std_stderr",xxr,".csv", sep="-");
++ 
++ # Code for trimming data based on distance from mean using SD
++ 
++ trim_factor<-2;
++ 
++ 
++ ####################  TRIMMING.........is this doing what I think it is, or should I be using subset???
++ 
++ 
++ data_trim<-data[!is.na(data$ID),];
++ data_trim<-data_trim[!is.na(data_trim$nfoci),];
++ data_trim<-data_trim[!is.na(data_trim$n_size),];
++ data_trim<-data_trim[!is.na(data_trim$foci_size),];
++ data_trim<-data_trim[!is.na(data_trim$n_mean),];
++ data_trim<-data_trim[!is.na(data_trim$f_mean),];
++ data_trim<-data_trim[!is.na(data_trim$foci_mean),];
++ data_trim<-data_trim[!is.na(data_trim$Rdna),];
++ data_trim<-data_trim[!is.na(data_trim$Rgrad),];
++ data_trim<-data_trim[!is.na(data_trim$foci_dist),];
++ data_trim<-data_trim[!is.na(data_trim$numPfoci),];
++ data_trim<-data_trim[!is.na(data_trim$numNfoci),];
++ data_trim<-data_trim[!is.na(data_trim$size_DB),];
++ data_trim<-data_trim[!is.na(data_trim$mean_DB),];
++ data_trim<-data_trim[!is.na(data_trim$nuc_dist),];
++ 
++ 
++ 
++ mu<-lapply(data_trim,mean,na.rm=T);
++ std<-lapply(data_trim,sd,na.rm=T);
++ mu<-as.numeric(mu);
++ std<-as.numeric(std);
++ up_trim_value<-mu+trim_factor*std;
++ low_trim_value<-mu-trim_factor*std;
++ 
++ ###### data_trim<-data_trim[data_trim$ID>=low_trim_value[1],];
++ data_trim<-data_trim[data_trim$nfoci>=low_trim_value[2],];      ##########  CHECK THAT THESE NUMBERS MATCH THE ROW
++ data_trim<-data_trim[data_trim$n_size>=low_trim_value[3],];
++ data_trim<-data_trim[data_trim$foci_size>=low_trim_value[4],];
++ data_trim<-data_trim[data_trim$n_mean>=low_trim_value[5],];
++ data_trim<-data_trim[data_trim$f_mean>=low_trim_value[6],];
++ data_trim<-data_trim[data_trim$foci_mean>=low_trim_value[7],];
++ data_trim<-data_trim[data_trim$Rdna>=low_trim_value[8],];
++ data_trim<-data_trim[data_trim$Rgrad>=low_trim_value[9],];
++ data_trim<-data_trim[data_trim$foci_dist>=low_trim_value[10],];
++ data_trim<-data_trim[data_trim$numPfoci>=low_trim_value[11],];
++ data_trim<-data_trim[data_trim$numNfoci>=low_trim_value[12],];
++ data_trim<-data_trim[data_trim$size_DB>=low_trim_value[13],];
++ data_trim<-data_trim[data_trim$mean_DB>=low_trim_value[14],];
++ data_trim<-data_trim[data_trim$nuc_dist>=low_trim_value[15],];
++ 
++ ###### data_trim<-data_trim[data_trim$ID<=up_trim_value[1],];
++ data_trim<-data_trim[data_trim$nfoci<=up_trim_value[2],];
++ data_trim<-data_trim[data_trim$n_size<=up_trim_value[3],];
++ data_trim<-data_trim[data_trim$foci_size<=up_trim_value[4],];
++ data_trim<-data_trim[data_trim$n_mean<=up_trim_value[5],];
++ data_trim<-data_trim[data_trim$f_mean<=up_trim_value[6],];
++ data_trim<-data_trim[data_trim$foci_mean<=up_trim_value[7],];
++ data_trim<-data_trim[data_trim$Rdna<=up_trim_value[8],];
++ data_trim<-data_trim[data_trim$Rgrad<=up_trim_value[9],];
++ data_trim<-data_trim[data_trim$foci_dist<=up_trim_value[10],];
++ data_trim<-data_trim[data_trim$numPfoci<=up_trim_value[11],];
++ data_trim<-data_trim[data_trim$numNfoci<=up_trim_value[12],];
++ data_trim<-data_trim[data_trim$size_DB<=up_trim_value[13],];
++ data_trim<-data_trim[data_trim$mean_DB<=up_trim_value[14],];
++ data_trim<-data_trim[data_trim$nuc_dist<=up_trim_value[15],];
++ 
++ 
++  cols=ncol(data_trim)
++ 	for(i in 1:(cols)) {
++ 		data_trim<-data_trim[!is.na(data_trim[i]),];
++ #		data_trim<-data[data[i] < up_trim_value[i],];
++ 	};
++ 
++ 
++ ################### THE BELOW ADDS A BUNCH OF COLUMNS TO THE GRAPH
++ 
++ # for (i in 1:length(data_trim)) {
++ # 	if (i>=length(data_trim)) { break } else{}
++ # 	if (mean(data_trim[i])==0) {
++ # 		data_trim[i]<-NULL
++ # 		i<-i-1}}
++ # 
++ # data_trim<-cbind(data_trim,(data_trim$n_size)/(data_trim$size_DB));   ####Gives perc volume of DAPI in DB
++ # data_trim<-cbind(data_trim,data_trim$size_DB*data_trim$mean_DB);   ####Gives total DAPI signal of DB
++ # data_trim<-cbind(data_trim,data_trim$n_size*data_trim$n_mean);   ####Gives total DAPI signal
++ # data_trim<-cbind(data_trim,(data_trim$n_size*data_trim$n_mean)/(data_trim$size_DB*data_trim$mean_DB));   ####Gives perc of total DAPI in DB
++ # numPfoci_div_by_nfoci<-data_trim$numPfoci/data_trim$nfoci;
++ # Pfoci_theor_total_DAPI<-(data_trim$size_DB*data_trim$mean_DB)/(data_trim$n_size*data_trim$n_mean);
++ # Pfoci_theor_DAPI_vol<-(data_trim$size_DB)/(data_trim$n_size);
++ # data_trim<-cbind(data_trim,numPfoci_div_by_nfoci);
++ # data_trim<-cbind(data_trim,Pfoci_theor_total_DAPI);
++ # data_trim<-cbind(data_trim,Pfoci_theor_DAPI_vol);
++ # actualP_div_theorP_total_DAPI<-numPfoci_div_by_nfoci/Pfoci_theor_total_DAPI;
++ # actualP_div_theorP_DAPI_vol<-numPfoci_div_by_nfoci/Pfoci_theor_DAPI_vol;
++ # data_trim<-cbind(data_trim, actualP_div_theorP_total_DAPI);
++ # data_trim<-cbind(data_trim, actualP_div_theorP_DAPI_vol);
++ # data_trim<-cbind(data_trim, data_trim$foci_dist/data_trim$n_size); # normalizes foci dist against the size of the nucleus
++ # data_trim<-cbind(data_trim,nrow(data_trim));  # Adds number of nuclei counted for that experiment to the end of data_trim
++ # colnames(data_trim)[length(data_trim)-10]<-"vol_DB_div_vol_nuc";
++ # colnames(data_trim)[length(data_trim)-9]<-"size_DB_times_mean_DB";
++ # colnames(data_trim)[length(data_trim)-8]<-"n_size_times_n_mean";
++ # colnames(data_trim)[length(data_trim)-7]<-"total_DB_div_total_nuc";
++ # colnames(data_trim)[length(data_trim)-6]<-"numPfoci_div_by_nfoci";
++ # colnames(data_trim)[length(data_trim)-5]<-"Pfoci_theor_total_DAPI";
++ # colnames(data_trim)[length(data_trim)-4]<-"Pfoci_theor_DAPI_vol";
++ # colnames(data_trim)[length(data_trim)-3]<-"actualP_div_theorP_total_DAPI";
++ # colnames(data_trim)[length(data_trim)-2]<-"actualP_div_theorP_DAPI_vol";
++ # colnames(data_trim)[length(data_trim)-1]<-"foci_dist_div_n_size";
++ # colnames(data_trim)[length(data_trim)]<-"num_nuc_counted";  # should have just labeled the colnames as I did cbind...easier to add new columns and not screw up names
++ # 
++ ################### THE ABOVE ADDS A BUNCH OF COLUMNS TO THE GRAPH
++ 
++ # data_trim<-cbind(data_trim,(data_trim$size_DB)/(data_trim$n_size));   ####Gives perc volume of DAPI in DB
++ # colnames(data_trim)[length(data_trim)]<-"vol_perc_DB";
++ # data_trim<-cbind(data_trim,data_trim$size_DB*data_trim$mean_DB);   ####Gives total DAPI signal of DB
++ # colnames(data_trim)[length(data_trim)]<-"total_DAPI_signal_of_DB";
++ # data_trim<-cbind(data_trim,data_trim$n_size*data_trim$n_mean);     ####Gives total DAPI signal
++ # colnames(data_trim)[length(data_trim)]<-"total_DAPI_in_nuc";
++ 
++ n_row<-nrow(data);
++ n_row_trim<-nrow(data_trim);
++ 
++ 	if (n_row_trim > 0) {
++ 
++ 		n_trimmed<-n_row-n_row_trim;
++ 		
++ 		
++ 		# Analysis of trimmed data
++ 		mu1<-lapply(data_trim,mean);
++ 		std1<-lapply(data_trim,sd);
++ 		# d<-!is.na(data_trim);
++ 		e<-lapply(data_trim,length); # for future reference, could have used sapply, but then I would have to figure out the output again
++ 		sqrt_e<-lapply(e,sqrt);
++ 		std_err<-as.numeric(std1)/as.numeric(sqrt_e);
++ 		### labels <- c("average", "standard deviation", "standard error");
++ 		### row.names(q) <- labels;
++ 		write.table(mu1, file=csv,row.names=FALSE, sep=",");
++ 		# row.names(q) <- "average";
++ 		write.table(std1, file=csv,row.names=FALSE,col.names=FALSE, sep=",", append=TRUE);
++ 		# row.names(w) <- labels[2];
++ 		tt<-as.matrix(std_err);
++ 		ttt<-c(tt,std1);   ###### Could have done better with either cbind or rbind
++ 		ttt$ID<-NULL;
++ 		ttt$nfoci<-NULL;
++ 		ttt$n_size<-NULL;
++ 		ttt$foci_size<-NULL;
++ 		ttt$n_mean<-NULL;
++ 		ttt$f_mean<-NULL;
++ 		ttt$foci_mean<-NULL;
++ 		ttt$Rdna<-NULL;
++ 		ttt$Rgrad<-NULL;
++ 		ttt$foci_dist<-NULL;
++ 		ttt$numPfoci<-NULL;
++ 		ttt$numNfoci<-NULL;
++ 		ttt$size_DB<-NULL;
++ 		ttt$mean_DB<-NULL;
++ 		ttt$nuc_dist<-NULL;
++ 		write.table(ttt, file=csv,row.names=FALSE,col.names=FALSE,sep=",",append=TRUE);
++ 		
++ 		
++ 		num_rows<-c("Number of rows in original data", n_row, "Number of rows in trimmed data", n_row_trim, "Number of rows trimmed", n_trimmed);
++ 			for (h in 1:6){
++ 			write.table(num_rows[h], file=csv,row.names=FALSE,col.names=FALSE,sep=",",append=TRUE);}
++ 		
++ 		
++ 		
++ 		
++ 		
++ 		# Look into cor.test for p-values associated with R-values
++ 		# as.matrix to convert list to matrix, then transform
++ 		
++ 		
++ 		# Gets rid of any column with a sd of 0 because this throws off order.single
++ 		data_trim$ID<-NULL;
++ 	for (i in 1:length(data_trim)) {
++ 		if (i>length(data_trim)) { break } else{}
++ 		if (sd(data_trim[i])==0) {
++ 		data_trim[i]<-NULL
++ 		i<-i-1
++ 		} else {}
++ 	}
++ 
++ # 		data_trim$ID<-NULL;
++ # 	for (i in 1:length(data_trim)) {
++ # 		if (sd(data_trim[i])==0) {
++ # 			k<-append(k,i)
++ # 		} else {}
++ # 	}
++ 
++ 		
++ 		# PLOTS!!!!
++ 		
++ 		# Gives 100 colors for scatterplot from blue to white to red
++ 		scat_col<-rev(heat.colors(100))
++ 
++ 		
++ #	library(car);
++ 		# pairs(~nfoci+n_size+foci_size+n_mean+f_mean+foci_mean+Rdna+Rgrad+foci_dist+numPfoci+numNfoci+nuc_dist, data=data_trim,main="Nucleus Summary Scatterplot Matrix");
++ 				
++ 				postscript(m, width=10);
++ #				old.par<-par(no.readonly=TRUE);
++ #				par(mar=c(4,4,4,4))
++ 				data_trim_cor<-abs(cor(data_trim)); # get correlations
++ 				data_trim_col<-dmat.color(data_trim_cor,byrank=F,colors=scat_col); # get colors
++ 				data_trim_o<-c(7,8,3,13,4,12,9,2,10,1,5,6,11) # Orders variables in a fixed manner
++ # 				if (x==a[1]) {
++ # 					data_trim_o<-order.single(data_trim_cor); # reorders variables so those with highest correlations are closest to the diagonal
++ # 				}
++ 				cpairs(data_trim, data_trim_o, panel.colors=data_trim_col, gap=.5, main=n, pch=1, cex=.25);
++ 				gradient.rect(1,0,3,6,col=scat_col)
++ #				on.exit(par(old.par))
++ 				dev.off();
++ 	}else{
++ 		no_rows<-paste("NO_SCATTERPLOT_BC_NO_ROWS_IN_", xxr)
++ 		sink(no_rows)
++ 		sink()};
++ 
++ }
+Error in file(file, "r") : cannot open the connection
+Calls: read.table -> file
+In addition: Warning message:
+In file(file, "r") :
+  cannot open file 'processed/fitc/nuc_summary_HP1a_control_tech.txt': No such file or directory
+Execution halted

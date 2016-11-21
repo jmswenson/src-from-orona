@@ -1,0 +1,21 @@
+# source("load_stats.txt")
+# to determine if average number of foci per nucleus is the same between exp and control
+
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/brama_control/processed/fitc/nuc_summary.txt",header = TRUE);
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/brama/processed/fitc/nuc_summary.txt",header = TRUE);
+x<- sum(exp$FociCount)/nrow(exp); #assigns to x the average number of foci per nucleus for exp
+y<- sum(cont$FociCount)/nrow(cont); #assigns to y the average number of foci per nucleus for control
+# x/y; #gives the ratio of the average number of foci per nucleus with numbers greater than one indicating more foci per nucleus in exp
+# shapiro.test(exp$Rdna); # performs normality test.  if p-value is above .05 than it is not normal
+# shapiro.test(cont$Rdna);
+# shapiro.test(exp$Rgrad);
+# shapiro.test(cont$Rgrad);
+# t.test(exp$Rdna,cont$Rdna); # use if data is normal
+# wilcox.test(exp$Rdna,cont$Rdna); # use if data is not normal
+# t.test(exp$Rgrad,cont$Rgrad);
+# wilcox.test(exp$Rgrad,cont$Rgrad);
+# sd(exp$Rdna)
+# sd(cont$Rdna)
+# nrow(exp)
+# nrow(cont)
+

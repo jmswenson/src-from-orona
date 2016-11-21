@@ -1,0 +1,107 @@
+# cd /Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/
+# source("stats_sylvain_absolute_number.txt")
+# Set threshold for group
+# Need to figure out how to not basis this towards sample with higher n
+
+thr <- 1.2;
+
+# Process control
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(cont$Rdna,by=list(cont$NucID,cont$Filename),FUN=mean)
+pos_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>thr));
+
+for (i in 1:length(aggRdna$Group.1))
+total_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>0));
+
+Perc_pos_Rdna_cont = pos_RdnaC; # number of foci above thr per nucleus
+
+# Process experiment
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(exp$Rdna,by=list(exp$NucID,exp$Filename),FUN=mean)
+pos_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_Rdna[i] <- sum((exp$NucID==aggRdna$Group.1[i])&(exp$Filename==aggRdna$Group.2[i])&(exp$Rdna>thr));
+
+for (i in 1:length(aggRdna$Group.1))
+total_Rdna[i] <- sum((exp$NucID==aggRdna$Group.1[i])&(exp$Filename==aggRdna$Group.2[i])&(exp$Rdna>0));
+
+Perc_pos_Rdna_exp = pos_Rdna; # gives number of foci in a nucleus above a given Rdna value which is defined by thr
+
+postscript("HP2_1.2_boxplot.ps"); #turns postscript on to save file to location in ""
+boxplot(Perc_pos_Rdna_exp, Perc_pos_Rdna_cont, ylab= "number of foci per nucleus above Rdna = thr", xlab="Left is HP2, right is control"); #makes boxplot
+dev.off(); #turns postscript off
+
+postscript("HP2_1.2_qqplot.ps"); #turns postscript on to save file to location in ""
+qqplot(Perc_pos_Rdna_exp, Perc_pos_Rdna_cont); #makes qqplot
+dev.off(); #turns postscript off
+
+exp_above_thr <- Perc_pos_Rdna_exp;
+cntrl_above_thr <- Perc_pos_Rdna_cont;
+
+# wilcox.test(cntrl_above_thr, exp_above_thr,alternative=c("two.sided")); #performs wilcox.test on data above thr
+# wilcox.test(Perc_pos_Rdna_cont, Perc_pos_Rdna_exp,alternative=c("two.sided")); #performs wilcox.test on data below thr
+# wilcox.test(cont$Rdna, exp$Rdna,alternative=c("two.sided")); #performs wilcox.test on all data
+
+
+# wilcox.test(Perc_pos_Rdna_cont, Perc_pos_Rdna_exp,alternative=c("two.sided")); #performs wilcox.test on data above thr
+# wilcox.test(cont$Rdna, exp$Rdna,alternative=c("two.sided")); #performs wilcox.test on all data
+# sum(cont$NucID, exp$NucID); #gives total amount of foci counted for control and experiment
+# summary(cont);
+# summary(exp);
+
+
+# performs above analysis for values less than or equal to the threshold
+# Process control
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(cont$Rdna,by=list(cont$NucID,cont$Filename),FUN=mean)
+pos_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_RdnaC <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna<=thr));
+
+for (i in 1:length(aggRdna$Group.1))
+total_RdnaC[i] <- sum((cont$NucID==aggRdna$Group.1[i])&(cont$Filename==aggRdna$Group.2[i])&(cont$Rdna>0));
+
+Perc_pos_Rdna_cont = pos_RdnaC;
+
+# Process experiment
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/foci_summary.txt",header = TRUE);
+aggRdna = aggregate(exp$Rdna,by=list(exp$NucID,exp$Filename),FUN=mean)
+pos_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+total_Rdna <- matrix(0,nrow=aggRdna$Group.1,ncol=1);
+
+for (i in 1:length(aggRdna$Group.1))
+pos_Rdna[i] <- sum((exp$NucID==aggRdna$Group.1[i])&(exp$Filename==aggRdna$Group.2[i])&(exp$Rdna<=thr));
+
+for (i in 1:length(aggRdna$Group.1))
+total_Rdna[i] <- sum((exp$NucID==aggRdna$Group.1[i])&(exp$Filename==aggRdna$Group.2[i])&(exp$Rdna>0));
+
+Perc_pos_Rdna_exp = pos_Rdna; #gives fraction of foci in a nucleus above a given Rdna value which is defined by thr
+
+postscript("HP2_1.2_boxplot<=.ps"); #turns postscript on to save file to location in ""
+boxplot(Perc_pos_Rdna_cont, Perc_pos_Rdna_exp); #makes boxplot
+dev.off(); #turns postscript off
+
+postscript("HP2_1.2_qqplot<=.ps"); #turns postscript on to save file to location in ""
+qqplot(Perc_pos_Rdna_cont, Perc_pos_Rdna_exp); #makes qqplot
+dev.off(); #turns postscript off
+
+
+
+############################################################
+
+
+
+
+
+
+
+# wilcox.test(Perc_pos_Rdna_cont, Perc_pos_Rdna_exp,alternative=c("two.sided")); #performs wilcox.test on data less than or equal to thr.........make sure Perc_pos_Rdna is what you think it is
+# sum(cont$NucID, exp$NucID); #gives total amount of foci counted for control and experiment

@@ -1,0 +1,24 @@
+# source("histograms.txt")
+# Gives histograms of the distribution of exp$Rdna and cont$Rdna
+
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/nuc_summary.txt",header = TRUE);
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/nuc_summary.txt",header = TRUE);
+
+exp_col<-rgb(1,0,0,.75); #assigns color and alpha value to exp data points
+cont_col<-rgb(0,0,1,.5);
+
+tiff(file="Histogram_of_HP2_and_GFP_control.tiff");
+hist(exp$Rdna, breaks=100, col=exp_col, main="Histogram of HP2 and GFP control");
+hist(cont$Rdna, breaks=100, col=cont_col, add=TRUE);
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff(file="Histogram_of_HP2.tiff")
+hist(exp$Rdna, breaks=100, col=exp_col, main="Histogram of HP2");
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off
+
+tiff("Histogram_of_HP2_control.tiff")
+hist(exp$Rdna, breaks=100, col=cont_col, main="Histogram of HP2_control");
+legend("topleft", c("HP2","HP2_control"), cex=0.8,col=c(exp_col,cont_col), pch=21:22, lty=1:2);
+dev.off(); #turns postscript off

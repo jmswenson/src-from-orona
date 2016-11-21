@@ -1,0 +1,39 @@
+This is an R port of Efron & Tibshirani's boostrap S-library that
+accompanies their 1993 book `An introduction to the bootstrap'.
+
+Changes from original:
+
+	changed all dyn.load2 calls to use dyn.load
+
+	fixed call of boott (had 2 variable argument lists)
+
+	restructered help files for R consistency
+
+	added dummy help page for data and internal functions
+
+
+Fritz Leisch
+
+New changes as of 2005:
+
+       returns of the form return(  ,  ,  ,  ...) changed to
+                           return(list(  ,  ,  ,  ...))
+
+       Code - documentation inconsistencies removed
+
+       Added help pages for all the datasets, and removed the dummy one. 
+       
+       Added examples, some new datasets added.
+
+
+Kjetil Halvorsen
+
+2012:
+Introduced file NAMESPACE
+Introduced date-based version numbers.
+Fixed an error in th examples section of abcnon.Rd
+README (this file) renames to NEWS
+
+
+
+

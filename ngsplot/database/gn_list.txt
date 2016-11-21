@@ -1,0 +1,3 @@
+ID	Assembly	Species	EnsVer	NPVer
+hg19	GRCh37	homo_sapiens	74.0	3.0
+dm3	BDGP5	drosophila_melanogaster	75.0	3.0

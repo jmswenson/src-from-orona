@@ -1,0 +1,13 @@
+# Calculates histogram of total DAPI by multiplying mean DAPI signal times size of nucleus
+cont <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2_control/processed/fitc/nuc_summary.txt",header = TRUE);
+exp <- read.table("/Users/joel/Desktop/6_10_09_imagesprocessed_with_sylvain/Processed/HP2/processed/fitc/nuc_summary.txt",header = TRUE);
+
+x<-(cont$NucArea*cont$MeanNucDapi); #calculates total DAPI
+postscript("total_dapi_HP2_control");
+hist(x, breaks = 100, main ="Histogram of total DAPI of HP2 control");
+dev.off();
+
+y<-(exp$NucArea*exp$MeanNucDapi); #calculates total DAPI
+postscript("total_dapi_HP2_exp");
+hist(x, breaks = 100, main ="Histogram of total DAPI of HP2 exp");
+dev.off();
